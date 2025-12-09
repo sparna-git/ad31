@@ -36,3 +36,10 @@ sh:deactivated "true"^^xsd:boolean.
 
 sacs:Date a sh:NodeShape;
   sh:deactivated "true"^^xsd:boolean .
+
+
+sacs:Instruction a sh:NodeShape;
+  sh:deactivated "true"^^xsd:boolean .
+
+sacs:Fait a sh:NodeShape;
+  sh:deactivated "true"^^xsd:boolean .  
