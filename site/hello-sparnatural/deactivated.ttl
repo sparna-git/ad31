@@ -30,9 +30,16 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
 
-sacs:Cote a sh:NodeShape;
-sh:deactivated "true"^^xsd:boolean.
+sacs:Cote sh:deactivated "true"^^xsd:boolean.
+sacs:Date sh:deactivated "true"^^xsd:boolean .
 
-
-sacs:Date a sh:NodeShape;
-  sh:deactivated "true"^^xsd:boolean .
+sacs:LegalStatus sh:deactivated "true"^^xsd:boolean .
+sacs:IdentifierType sh:deactivated "true"^^xsd:boolean .
+sacs:PlaceType sh:deactivated "true"^^xsd:boolean .
+sacs:EventType sh:deactivated "true"^^xsd:boolean .
+sacs:OccupationType sh:deactivated "true"^^xsd:boolean .
+sacs:ActivityType sh:deactivated "true"^^xsd:boolean .
+sacs:CarrierType sh:deactivated "true"^^xsd:boolean .
+sacs:DemographicGroup sh:deactivated "true"^^xsd:boolean .
+sacs:CorporateBodyType sh:deactivated "true"^^xsd:boolean .
+sacs:TypeProcedure sh:deactivated "true"^^xsd:boolean .
