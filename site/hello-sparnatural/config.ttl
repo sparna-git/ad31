@@ -36,24 +36,24 @@
   dct:abstract """(_english_) This page documents the structure of the Collections data published by AD31
 -----
 (_français_) Cette page documente la structure des données de Collections publiées par les AD31""";
-  dcat:distribution _:3dbd2bfec0e943b7a04bf7dd727f94e6524 .
+  dcat:distribution _:3dbd2bfec0e943b7a04bf7dd727f94e6600 .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6524 dct:format <https://www.iana.org/assignments/media-types/text/turtle>;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6600 dct:format <https://www.iana.org/assignments/media-types/text/turtle>;
   dcat:downloadURL <http://shapes.performing-arts.ch/collections/sapa-collections.ttl> .
 
 sacs:Cote a sh:NodeShape;
   volipi:iconName "fa-solid fa-laptop-code";
   sh:targetClass rico:Identifier;
-  rdfs:label "Cote"@fr;
-  skos:definition "Les cotes sont les identifiants uniques des sacs. Chaque identifiant correspond à un seul sac. Un sac peut avoir plusieurs identifiants (de types différents)."@fr;
+  rdfs:label "Identifiant"@fr;
+  skos:definition "Ici les identifiants utilisés dans le modèle. Les cotes sont les identifiants uniques des sacs. Chaque identifiant correspond à un seul sac. Un sac peut avoir plusieurs identifiants (de types différents). Les lieux peuvent avoir un code INSEE."@fr;
   sh:pattern "^https://data.archives.haute-garonne.fr/instanciation/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\"#[cote|castan[123]]";
   foaf:depiction sacs:Diagram_Instantiation;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6525;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6601;
   shacl-play:background-color "ffffff";
   sh:property sacs:Cote_name, sacs:Cote_hasIdentifierType .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6525 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6601 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Date a sh:NodeShape;
@@ -64,11 +64,11 @@ sacs:Date a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/evenement/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}#date-[debut|fin]";
   foaf:depiction sacs:Diagram_Activity_Procedure;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6526;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6602;
   shacl-play:background-color "ded9c3";
   sh:property sacs:Date_normalizedDateValue, sacs:Date_expressedDate .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6526 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6602 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Notice a sh:NodeShape;
@@ -79,12 +79,12 @@ sacs:Notice a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/archive/ark:/[0-9]{5}/.*$";
   foaf:depiction sacs:Diagram_Instantiation;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6527;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6603;
   shacl-play:background-color "dbeef4";
   sh:property sacs:Notice_name, sacs:Notice_generalDescription, sacs:Notice_recordResourceExtent,
     sacs:Notice_hasOrHadInstantiation, sacs:Notice_documents .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6527 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6603 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Fait a sh:NodeShape;
@@ -95,11 +95,11 @@ sacs:Fait a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/evenement/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Event_Place;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6528;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6604;
   shacl-play:background-color "fffa9f";
   sh:property sacs:Fait_name, sacs:Fait_hasEventType, sacs:Fait_hasOrHadLocation .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6528 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6604 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Instruction a sh:NodeShape;
@@ -110,7 +110,7 @@ sacs:Instruction a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/evenement/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Activity_Procedure;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6529;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6605;
   shacl-play:background-color "fffa9f";
   sh:property sacs:Instruction_name, sacs:Instruction_hasActivityType, sacs:Instruction_followsInTime,
     sacs:Instruction_precedesInTime, sacs:Instruction_isOrWasPerformedBy .
@@ -123,7 +123,7 @@ WHERE {
  ?this rico:hasActivityType type:acins .
 }""" .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6529 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6605 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Juridiction a sh:NodeShape;
@@ -134,7 +134,7 @@ sacs:Juridiction a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/agent/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Activity_Procedure;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6530;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6606;
   shacl-play:background-color "c7d8f1";
   sh:property sacs:Juridiction_name, sacs:Juridiction_hasOrHadLegalStatus, sacs:Juridiction_agentHasOrHadLocation,
     sacs:Juridiction_hasOrHadCorporateBodyType .
@@ -147,7 +147,7 @@ WHERE {
  ?this rico:hasOrHadCorporateBodyType type:cljur .
 }""" .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6530 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6606 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Liasse a sh:NodeShape;
@@ -158,7 +158,7 @@ sacs:Liasse a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/instanciation/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Instantiation;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6531;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6607;
   shacl-play:background-color "f5deb4";
   sh:property sacs:Liasse_hasCarrierType, sacs:Liasse_title, sacs:Liasse_hadComponent .
 
@@ -170,7 +170,7 @@ WHERE {
  ?this rico:hasCarrierType type:sulia .
 }""" .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6531 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6607 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Lieu a sh:NodeShape;
@@ -181,12 +181,12 @@ sacs:Lieu a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/lieu/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Event_Place;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6532;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6608;
   shacl-play:background-color "f99f9f";
   sh:property sacs:Lieu_name, sacs:Lieu_hasOrHadPlaceType, sacs:Lieu_isDirectlyContainedBy,
     sacs:Lieu_directlyContains, sacs:Lieu_hasOrHadIdentifier .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6532 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6608 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Procedure a sh:NodeShape;
@@ -197,7 +197,7 @@ sacs:Procedure a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/evenement/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Activity_Procedure;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6533;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6609;
   shacl-play:background-color "fef9a0";
   sh:property sacs:Procedure_hasActivityType_ActivityType, sacs:Procedure_hasActivityType_ProcedureType,
     sacs:Procedure_name, sacs:Procedure_resultsOrResultedFrom, sacs:Procedure_hasOrHadSubevent,
@@ -212,7 +212,7 @@ WHERE {
  ?this rico:hasActivityType type:acpro .
 }""" .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6533 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6609 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:Sac a sh:NodeShape;
@@ -223,7 +223,7 @@ sacs:Sac a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/instanciation/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Instantiation;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6534;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6610;
   shacl-play:background-color "f4ddb4";
   sh:property sacs:Sac_name, sacs:Sac_hasCarrierType, sacs:Sac_physicalCharacteristicsNote,
     sacs:Sac_structure, sacs:Sac_hasOrHadIdentifier, sacs:Sac_wasComponentOf, sacs:Sac_isOrWasInstantiationOf,
@@ -237,7 +237,7 @@ WHERE {
  ?this rico:hasCarrierType type:susac .
 }""" .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6534 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6610 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:PersonneMorale a sh:NodeShape;
@@ -248,7 +248,7 @@ sacs:PersonneMorale a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/agent/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Activity_Procedure;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6535;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6611;
   shacl-play:background-color "c3d3eb";
   sh:property sacs:PersonneMorale_name, sacs:PersonneMorale_hasOrHadCorporateBodyType,
     sacs:PersonneMorale_agentHasOrHadLocation .
@@ -261,7 +261,7 @@ WHERE {
  FILTER NOT EXISTS { ?this rico:hasOrHadCorporateBodyType type:cljur . }
 }""" .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6535 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6611 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:PersonnePhysique a sh:NodeShape;
@@ -272,12 +272,12 @@ sacs:PersonnePhysique a sh:NodeShape;
   sh:pattern "^https://data.archives.haute-garonne.fr/agent/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
   foaf:depiction sacs:Diagram_Activity_Procedure;
   sh:closed "true"^^xsd:boolean;
-  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6536;
+  sh:ignoredProperties _:3dbd2bfec0e943b7a04bf7dd727f94e6612;
   shacl-play:background-color "e5dfeb";
   sh:property sacs:PersonnePhysique_name, sacs:PersonnePhysique_hasOrHadOccupationOfType,
     sacs:PersonnePhysique_hasOrHadDemographicGroup .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6536 rdf:first rdf:type;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6612 rdf:first rdf:type;
   rdf:rest rdf:nil .
 
 sacs:LegalStatus a sh:NodeShape;
@@ -294,9 +294,9 @@ rico:LegalStatus rdfs:subClassOf skos:Concept .
 sacs:IdentifierType a sh:NodeShape;
   volipi:iconName "fa-solid fa-list-ul";
   sh:targetClass rico:IdentifierType;
-  rdfs:label "Type de cote"@fr;
-  skos:definition "Vocabulaire contrôlé qualifiant une cote"@fr;
-  sh:pattern "^https://data.archives.haute-garonne.fr/type/ct[a-z]{3}$";
+  rdfs:label "Type d'identifiant"@fr;
+  skos:definition "Vocabulaire contrôlé qualifiant un identifiant"@fr;
+  sh:pattern "^https://data.archives.haute-garonne.fr/type/id[a-z]{3}$";
   shacl-play:background-color "ffffff";
   sh:property sacs:IdentifierType_inScheme, sacs:IdentifierType_prefLabel .
 
@@ -624,11 +624,11 @@ sacs:Procedure_hasActivityType_ActivityType sh:path rico:hasActivityType;
   sh:name "a pour type d'activité"@fr;
   sh:description "Vocabulaire type d'activité"@fr;
   sh:nodeKind sh:IRI;
-  sh:qualifiedValueShape _:3dbd2bfec0e943b7a04bf7dd727f94e6537;
+  sh:qualifiedValueShape _:3dbd2bfec0e943b7a04bf7dd727f94e6613;
   sh:qualifiedMinCount "1"^^xsd:integer;
   sh:qualifiedMaxCount "1"^^xsd:integer .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6537 sh:class rico:ActivityType;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6613 sh:class rico:ActivityType;
   sh:hasValue type:acpro .
 
 sacs:Procedure_hasActivityType_ProcedureType sh:path rico:hasActivityType;
@@ -636,10 +636,10 @@ sacs:Procedure_hasActivityType_ProcedureType sh:path rico:hasActivityType;
   sh:description "Vocabulaire type de procédure"@fr;
   sh:nodeKind sh:IRI;
   dash:searchWidget core:ListProperty;
-  sh:qualifiedValueShape _:3dbd2bfec0e943b7a04bf7dd727f94e6538;
+  sh:qualifiedValueShape _:3dbd2bfec0e943b7a04bf7dd727f94e6614;
   sh:qualifiedMaxCount "2"^^xsd:integer .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6538 sh:class ad31-onto:TypeProcedure .
+_:3dbd2bfec0e943b7a04bf7dd727f94e6614 sh:class ad31-onto:TypeProcedure .
 
 sacs:Procedure_name sh:path rico:name;
   sh:name "intitulé"@fr;
@@ -675,17 +675,17 @@ sacs:Procedure_hasOrHadParticipant sh:path rico:hasOrHadParticipant;
   sh:name "a impliqué"@fr;
   sh:description "Une procédure implique des parties"@fr;
   sh:nodeKind sh:IRI;
-  sh:or _:3dbd2bfec0e943b7a04bf7dd727f94e6541 .
+  sh:or _:3dbd2bfec0e943b7a04bf7dd727f94e6617 .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6539 sh:node sacs:PersonnePhysique .
+_:3dbd2bfec0e943b7a04bf7dd727f94e6615 sh:node sacs:PersonnePhysique .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6540 sh:node sacs:PersonneMorale .
+_:3dbd2bfec0e943b7a04bf7dd727f94e6616 sh:node sacs:PersonneMorale .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6541 a rdf:List;
-  rdf:first _:3dbd2bfec0e943b7a04bf7dd727f94e6539;
-  rdf:rest _:3dbd2bfec0e943b7a04bf7dd727f94e6542 .
+_:3dbd2bfec0e943b7a04bf7dd727f94e6617 a rdf:List;
+  rdf:first _:3dbd2bfec0e943b7a04bf7dd727f94e6615;
+  rdf:rest _:3dbd2bfec0e943b7a04bf7dd727f94e6618 .
 
-_:3dbd2bfec0e943b7a04bf7dd727f94e6542 rdf:first _:3dbd2bfec0e943b7a04bf7dd727f94e6540;
+_:3dbd2bfec0e943b7a04bf7dd727f94e6618 rdf:first _:3dbd2bfec0e943b7a04bf7dd727f94e6616;
   rdf:rest rdf:nil .
 
 sacs:Procedure_hasBeginningDate sh:path rico:hasBeginningDate;
@@ -825,7 +825,7 @@ sacs:LegalStatus_inScheme sh:path skos:inScheme;
 
 sacs:IdentifierType_inScheme sh:path skos:inScheme;
   sh:name "in scheme"@fr;
-  sh:hasValue vocabulaire:ct .
+  sh:hasValue vocabulaire:id .
 
 sacs:PlaceType_inScheme sh:path skos:inScheme;
   sh:name "in scheme"@fr;
