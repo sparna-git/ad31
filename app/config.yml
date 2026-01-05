@@ -1,0 +1,25 @@
+
+
+source:
+  # Notice principal
+  notice: 'data\SemSac_notices.xlsx'
+  # Catalog of personnes physiques
+  personphysique: 'data\others_list\SemSac_personnes_physiques.xlsx'
+  # Catalog of personnes morales
+  personnesmorales: 'data\others_list\SemSac_personnes_morales.xlsx'
+  # Catalog of juridictions
+  juri: 'data\others_list\liste_juridictions.xlsx'
+  # Lieux
+  lieux: 'data\others_list\SemSac_lieux_des_faits.xlsx'
+  #
+template:
+  conf_notice: 'data\json\notices.json'
+
+vocabularies:
+  voc_typeProfession: 'data\vocabularies\typeProfession.json'
+  voc_sexePersonnes: 'data\vocabularies\sexePersonnes.json'
+  voc_typeJuridiction: 'data\vocabularies\typeJuridiction.json'
+  voc_typeLieu: 'data\vocabularies\typeLieu.json'
+  voc_typeProcedure: 'data\vocabularies\typeProcedure.json'
+  voc_qualifFaits: 'data\vocabularies\qualifFaits.json'
+  voc_collectivite: 'data\vocabularies\typeCollectivité.json'
