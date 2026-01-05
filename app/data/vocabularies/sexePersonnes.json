@@ -1,0 +1,14 @@
+{
+    "Homme":  {
+        "Concept URI": "type:sxhom",
+        "skos:notation": "sxhom"
+    },
+    "Femme": {
+        "Concept URI": "type:sxfem",
+        "skos:notation": "sxfem"
+    },
+    "Indéterminé": {
+        "Concept URI": "type:sxind",
+        "skos:notation": "sxind"
+    } 
+}

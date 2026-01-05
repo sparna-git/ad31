@@ -1,0 +1,430 @@
+{
+    "abus de pouvoir": {
+        "Concept URI": "type:faabu",
+        "skos:notation": "faabu"
+    },
+    "adultère": {
+        "Concept URI": "type:faadu",
+        "skos:notation": "faadu"
+    },
+    "affaire dotale": {
+        "Concept URI": "type:faaff",
+        "skos:notation": "faaff"
+    },
+    "agression préméditée": {
+        "Concept URI": "type:faagr",
+        "skos:notation": "faagr"
+    },
+    "appel de taxe": {
+        "Concept URI": "type:faapp",
+        "skos:notation": "faapp"
+    },
+    "attroupement": {
+        "Concept URI": "type:faatt",
+        "skos:notation": "faatt"
+    },
+    "avortement": {
+        "Concept URI": "type:faavo",
+        "skos:notation": "faavo"
+    },
+    "banqueroute frauduleuse": {
+        "Concept URI": "type:faban",
+        "skos:notation": "faban"
+    },
+    "bestialité": {
+        "Concept URI": "type:fabes",
+        "skos:notation": "fabes"
+    },
+    "blasphème": {
+        "Concept URI": "type:fabla",
+        "skos:notation": "fabla"
+    },
+    "blessure avec arme à feu": {
+        "Concept URI": "type:fable",
+        "skos:notation": "fable"
+    },
+    "brigandage": {
+        "Concept URI": "type:fabri",
+        "skos:notation": "fabri"
+    },
+    "change illégal": {
+        "Concept URI": "type:faill",
+        "skos:notation": "faill"
+    },
+    "charivari": {
+        "Concept URI": "type:facha",
+        "skos:notation": "facha"
+    },
+    "concubinage": {
+        "Concept URI": "type:faccb",
+        "skos:notation": "faccb"
+    },
+    "concussion": {
+        "Concept URI": "type:faccs",
+        "skos:notation": "faccs"
+    },
+    "conflit de juridiction": {
+        "Concept URI": "type:facju",
+        "skos:notation": "facju"
+    },
+    "conflit en instance féodale": {
+        "Concept URI": "type:facin",
+        "skos:notation": "facin"
+    },
+    "conflit en possessoire": {
+        "Concept URI": "type:fapos",
+        "skos:notation": "fapos"
+    },
+    "contravention à ordonnances de police": {
+        "Concept URI": "type:facon",
+        "skos:notation": "facon"
+    },
+    "coup et blessure": {
+        "Concept URI": "type:facou",
+        "skos:notation": "facou"
+    },
+    "coupe de bois illégale": {
+        "Concept URI": "type:faboi",
+        "skos:notation": "faboi"
+    },
+    "débauche": {
+        "Concept URI": "type:fadeb",
+        "skos:notation": "fadeb"
+    },
+    "dégradation de bien": {
+        "Concept URI": "type:fadeg",
+        "skos:notation": "fadeg"
+    },
+    "délinquance ecclésiastique": {
+        "Concept URI": "type:faecc",
+        "skos:notation": "faecc"
+    },
+    "délit d'usage d'eau": {
+        "Concept URI": "type:faeau",
+        "skos:notation": "faeau"
+    },
+    "demande d'élargissement": {
+        "Concept URI": "type:fadem",
+        "skos:notation": "fadem"
+    },
+    "dépaissance de bestiaux": {
+        "Concept URI": "type:fadep",
+        "skos:notation": "fadep"
+    },
+    "dette": {
+        "Concept URI": "type:fadet",
+        "skos:notation": "fadet"
+    },
+    "diffamation": {
+        "Concept URI": "type:fadif",
+        "skos:notation": "fadif"
+    },
+    "droit de l'Église contesté": {
+        "Concept URI": "type:faegl",
+        "skos:notation": "faegl"
+    },
+    "droit du roi contesté": {
+        "Concept URI": "type:faroi",
+        "skos:notation": "faroi"
+    },
+    "droit seigneurial contesté": {
+        "Concept URI": "type:fasei",
+        "skos:notation": "fasei"
+    },
+    "duel": {
+        "Concept URI": "type:fadue",
+        "skos:notation": "fadue"
+    },
+    "émotion populaire": {
+        "Concept URI": "type:faemo",
+        "skos:notation": "faemo"
+    },
+    "empoisonnement": {
+        "Concept URI": "type:faemp",
+        "skos:notation": "faemp"
+    },
+    "emprisonnement abusif": {
+        "Concept URI": "type:fapri",
+        "skos:notation": "fapri"
+    },
+    "enquête d'office sur la vie et les mœurs": {
+        "Concept URI": "type:faenq",
+        "skos:notation": "faenq"
+    },
+    "escroquerie": {
+        "Concept URI": "type:faesc",
+        "skos:notation": "faesc"
+    },
+    "évasion": {
+        "Concept URI": "type:faeva",
+        "skos:notation": "faeva"
+    },
+    "exposition d'enfant": {
+        "Concept URI": "type:faexp",
+        "skos:notation": "faexp"
+    },
+    "extorsion de contrat": {
+        "Concept URI": "type:faext",
+        "skos:notation": "faext"
+    },
+    "fait de chasse": {
+        "Concept URI": "type:fafai",
+        "skos:notation": "fafai"
+    },
+    "fait de pêche": {
+        "Concept URI": "type:fafpc",
+        "skos:notation": "fafpc"
+    },
+    "fausse monnaie": {
+        "Concept URI": "type:famon",
+        "skos:notation": "famon"
+    },
+    "faux en écriture": {
+        "Concept URI": "type:faecr",
+        "skos:notation": "faecr"
+    },
+    "faux témoignages": {
+        "Concept URI": "type:fafau",
+        "skos:notation": "fafau"
+    },
+    "fragment de procédure": {
+        "Concept URI": "type:fafrg",
+        "skos:notation": "fafrg"
+    },
+    "fratricide": {
+        "Concept URI": "type:fafrt",
+        "skos:notation": "fafrt"
+    },
+    "gravidation": {
+        "Concept URI": "type:fagra",
+        "skos:notation": "fagra"
+    },
+    "héritage": {
+        "Concept URI": "type:faher",
+        "skos:notation": "faher"
+    },
+    "incendie": {
+        "Concept URI": "type:fafeu",
+        "skos:notation": "fafeu"
+    },
+    "inceste": {
+        "Concept URI": "type:fainc",
+        "skos:notation": "fainc"
+    },
+    "inceste spirituel": {
+        "Concept URI": "type:faspi",
+        "skos:notation": "faspi"
+    },
+    "infanticide": {
+        "Concept URI": "type:fainf",
+        "skos:notation": "fainf"
+    },
+    "injure écrite": {
+        "Concept URI": "type:fainj",
+        "skos:notation": "fainj"
+    },
+    "injure orale": {
+        "Concept URI": "type:faora",
+        "skos:notation": "faora"
+    },
+    "insubordination d'un domestique": {
+        "Concept URI": "type:fains",
+        "skos:notation": "fains"
+    },
+    "maquerellage": {
+        "Concept URI": "type:famaq",
+        "skos:notation": "famaq"
+    },
+    "menace": {
+        "Concept URI": "type:famen",
+        "skos:notation": "famen"
+    },
+    "meurtre": {
+        "Concept URI": "type:fameu",
+        "skos:notation": "fameu"
+    },
+    "meurtre de dément": {
+        "Concept URI": "type:famed",
+        "skos:notation": "famed"
+    },
+    "meurtre de grand chemin": {
+        "Concept URI": "type:fache",
+        "skos:notation": "fache"
+    },
+    "meurtre involontaire": {
+        "Concept URI": "type:fainv",
+        "skos:notation": "fainv"
+    },
+    "mitoyenneté": {
+        "Concept URI": "type:famit",
+        "skos:notation": "famit"
+    },
+    "mutilation": {
+        "Concept URI": "type:famut",
+        "skos:notation": "famut"
+    },
+    "non déterminé": {
+        "Concept URI": "type:fanod",
+        "skos:notation": "fanod"
+    },
+    "non-respect de la censure": {
+        "Concept URI": "type:fanon",
+        "skos:notation": "fanon"
+    },
+    "obstruction à justice": {
+        "Concept URI": "type:faobs",
+        "skos:notation": "faobs"
+    },
+    "parricide": {
+        "Concept URI": "type:fapar",
+        "skos:notation": "fapar"
+    },
+    "passage contesté": {
+        "Concept URI": "type:fapas",
+        "skos:notation": "fapas"
+    },
+    "péculat": {
+        "Concept URI": "type:fapec",
+        "skos:notation": "fapec"
+    },
+    "port d'armes": {
+        "Concept URI": "type:fapor",
+        "skos:notation": "fapor"
+    },
+    "préséance contestée": {
+        "Concept URI": "type:faprc",
+        "skos:notation": "faprc"
+    },
+    "prévarication": {
+        "Concept URI": "type:fapre",
+        "skos:notation": "fapre"
+    },
+    "prostitution": {
+        "Concept URI": "type:fapro",
+        "skos:notation": "fapro"
+    },
+    "protestant": {
+        "Concept URI": "type:faprt",
+        "skos:notation": "faprt"
+    },
+    "rapt": {
+        "Concept URI": "type:farap",
+        "skos:notation": "farap"
+    },
+    "recel": {
+        "Concept URI": "type:farec",
+        "skos:notation": "farec"
+    },
+    "relaps": {
+        "Concept URI": "type:farel",
+        "skos:notation": "farel"
+    },
+    "rupture de ban": {
+        "Concept URI": "type:farup",
+        "skos:notation": "farup"
+    },
+    "rupture de contrat": {
+        "Concept URI": "type:facnt",
+        "skos:notation": "facnt"
+    },
+    "sacrilège": {
+        "Concept URI": "type:fasac",
+        "skos:notation": "fasac"
+    },
+    "saisie": {
+        "Concept URI": "type:fasai",
+        "skos:notation": "fasai"
+    },
+    "séquestration": {
+        "Concept URI": "type:faseq",
+        "skos:notation": "faseq"
+    },
+    "sorcellerie": {
+        "Concept URI": "type:fasor",
+        "skos:notation": "fasor"
+    },
+    "spoliation": {
+        "Concept URI": "type:faspo",
+        "skos:notation": "faspo"
+    },
+    "stellionat": {
+        "Concept URI": "type:faste",
+        "skos:notation": "faste"
+    },
+    "subornation de témoins": {
+        "Concept URI": "type:fasub",
+        "skos:notation": "fasub"
+    },
+    "suicide": {
+        "Concept URI": "type:fasui",
+        "skos:notation": "fasui"
+    },
+    "trouble à l'exercice divin": {
+        "Concept URI": "type:fatro",
+        "skos:notation": "fatro"
+    },
+    "trouble causé par des militaires": {
+        "Concept URI": "type:famil",
+        "skos:notation": "famil"
+    },
+    "usure": {
+        "Concept URI": "type:fausu",
+        "skos:notation": "fausu"
+    },
+    "usurpation de clientèle": {
+        "Concept URI": "type:facli",
+        "skos:notation": "facli"
+    },
+    "usurpation d'identité": {
+        "Concept URI": "type:faide",
+        "skos:notation": "faide"
+    },
+    "uxoricide": {
+        "Concept URI": "type:fauxo",
+        "skos:notation": "fauxo"
+    },
+    "vagabondage": {
+        "Concept URI": "type:favag",
+        "skos:notation": "favag"
+    },
+    "viol": {
+        "Concept URI": "type:favio",
+        "skos:notation": "favio"
+    },
+    "viol de propriété": {
+        "Concept URI": "type:favpr",
+        "skos:notation": "favpr"
+    },
+    "violence": {
+        "Concept URI": "type:favce",
+        "skos:notation": "favce"
+    },
+    "violence familiale": {
+        "Concept URI": "type:fafam",
+        "skos:notation": "fafam"
+    },
+    "vol": {
+        "Concept URI": "type:favol",
+        "skos:notation": "favol"
+    },
+    "vol avec effraction": {
+        "Concept URI": "type:faeff",
+        "skos:notation": "faeff"
+    },
+    "vol avec récidive": {
+        "Concept URI": "type:faave",
+        "skos:notation": "faave"
+    },
+    "vol de grand chemin": {
+        "Concept URI": "type:fagrd",
+        "skos:notation": "fagrd"
+    },
+    "vol domestique": {
+        "Concept URI": "type:fadom",
+        "skos:notation": "fadom"
+    },
+    "vol qualifié": {
+        "Concept URI": "type:faqua",
+        "skos:notation": "faqua"
+    }
+}

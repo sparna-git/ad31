@@ -1,0 +1,58 @@
+{
+  "amirauté": {
+    "Concept URI": "type:juami",
+    "skos:notation": "juami"
+  },
+  "baillage": {
+    "Concept URI": "type:jubai",
+    "skos:notation": "jubai"
+  },
+  "bourse des marchands": {
+    "Concept URI": "type:jubou",
+    "skos:notation": "jubou"
+  },
+  "bureau des finances de la généralité": {
+    "Concept URI": "type:jubur",
+    "skos:notation": "jubur"
+  },
+  "cour de parlement": {
+    "Concept URI": "type:jucou",
+    "skos:notation": "jucou"
+  },
+  "justice municipale": {
+    "Concept URI": "type:jumun",
+    "skos:notation": "jumun"
+  },
+  "justice royale inférieure": {
+    "Concept URI": "type:juroy",
+    "skos:notation": "juroy"
+  },
+  "justice seigneuriale": {
+    "Concept URI": "type:jusei",
+    "skos:notation": "jusei"
+  },
+  "maîtrise des eaux et forêts": {
+    "Concept URI": "type:jumai",
+    "skos:notation": "jumai"
+  },
+  "officialité": {
+    "Concept URI": "type:juoff",
+    "skos:notation": "juoff"
+  },
+  "présidial": {
+    "Concept URI": "type:jupre",
+    "skos:notation": "jupre"
+  },
+  "sénéchaussée": {
+    "Concept URI": "type:jusen",
+    "skos:notation": "jusen"
+  },
+  "temporalité": {
+    "Concept URI": "type:jutem",
+    "skos:notation": "jutem"
+  },
+  "non déterminé": {
+    "Concept URI": "type:junon",
+    "skos:notation": "junon"
+  }
+}

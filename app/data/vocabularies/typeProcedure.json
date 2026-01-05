@@ -1,0 +1,10 @@
+{
+    "procédure civile" : {
+        "Concept URI": "type:pcciv",	
+        "skos:notation" : "pcciv" 
+    },
+    "procédure criminelle" : {
+        "Concept URI": "type:pccri",
+        "skos:notation" : "pccri"
+    }
+}

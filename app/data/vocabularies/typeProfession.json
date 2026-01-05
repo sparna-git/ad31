@@ -1,0 +1,166 @@
+{
+    "architecte": {
+        "Concept URI": "type:prarc",
+        "skos:notation": "prarc"
+    },
+    "arpenteur": {
+        "Concept URI": "type:prarp",
+        "skos:notation": "prarp"
+    },
+    "artisan·e": {
+        "Concept URI": "type:prarn",
+        "skos:notation": "prarn"
+    },
+    "artiste": {
+        "Concept URI": "type:prart",
+        "skos:notation": "prart"
+    },
+    "bourgeois·e": {
+        "Concept URI": "type:prbou",
+        "skos:notation": "prbou"
+    },
+    "brigand·e": {
+        "Concept URI": "type:prbri",
+        "skos:notation": "prbri"
+    },
+    "commis": {
+        "Concept URI": "type:prcom",
+        "skos:notation": "prcom"
+    },
+    "consul": {
+        "Concept URI": "type:prcon",
+        "skos:notation": "prcon"
+    },
+    "détenu·e": {
+        "Concept URI": "type:prdet",
+        "skos:notation": "prdet"
+    },
+    "écuyer": {
+        "Concept URI": "type:precu",
+        "skos:notation": "precu"
+    },
+    "enseignant": {
+        "Concept URI": "type:prens",
+        "skos:notation": "prens"
+    },
+    "entrepreneur d'ouvrages publics": {
+        "Concept URI": "type:prent",
+        "skos:notation": "prent"
+    },
+    "étudiant": {
+        "Concept URI": "type:pretu",
+        "skos:notation": "pretu"
+    },
+    "fermier": {
+        "Concept URI": "type:prfer",
+        "skos:notation": "prfer"
+    },
+    "geôlier": {
+        "Concept URI": "type:prgeo",
+        "skos:notation": "prgeo"
+    },
+    "grammairien": {
+        "Concept URI": "type:prgra",
+        "skos:notation": "prgra"
+    },
+    "greffier": {
+        "Concept URI": "type:prgre",
+        "skos:notation": "prgre"
+    },
+    "hôtelier·ère": {
+        "Concept URI": "type:prhot",
+        "skos:notation": "prhot"
+    },
+    "huissier": {
+        "Concept URI": "type:prhui",
+        "skos:notation": "prhui"
+    },
+    "indigent·e": {
+        "Concept URI": "type:prind",
+        "skos:notation": "prind"
+    },
+    "marchand·e": {
+        "Concept URI": "type:prmar",
+        "skos:notation": "prmar"
+    },
+    "meunier": {
+        "Concept URI": "type:prmeu",
+        "skos:notation": "prmeu"
+    },
+    "militaire": {
+        "Concept URI": "type:prmil",
+        "skos:notation": "prmil"
+    },
+    "musicien": {
+        "Concept URI": "type:prmus",
+        "skos:notation": "prmus"
+    },
+    "notaire": {
+        "Concept URI": "type:prnot",
+        "skos:notation": "prnot"
+    },
+    "officier": {
+        "Concept URI": "type:proff",
+        "skos:notation": "proff"
+    },
+    "pêcheur·euse": {
+        "Concept URI": "type:prpec",
+        "skos:notation": "prpec"
+    },
+    "personnel de maison": {
+        "Concept URI": "type:prper",
+        "skos:notation": "prper"
+    },
+    "praticien": {
+        "Concept URI": "type:prpra",
+        "skos:notation": "prpra"
+    },
+    "profession agricole": {
+        "Concept URI": "type:pragr",
+        "skos:notation": "pragr"
+    },
+    "profession de santé": {
+        "Concept URI": "type:prsan",
+        "skos:notation": "prsan"
+    },
+    "profession financière": {
+        "Concept URI": "type:prfin",
+        "skos:notation": "prfin"
+    },
+    "profession juridique": {
+        "Concept URI": "type:prjur",
+        "skos:notation": "prjur"
+    },
+    "professionnel du droit": {
+        "Concept URI": "type:prdro",
+        "skos:notation": "prdro"
+    },
+    "prostituée": {
+        "Concept URI": "type:prpro",
+        "skos:notation": "prpro"
+    },
+    "religieux·euse": {
+        "Concept URI": "type:prrel",
+        "skos:notation": "prrel"
+    },
+    "seigneur·esse": {
+        "Concept URI": "type:prsei",
+        "skos:notation": "prsei"
+    },
+    "séquestre": {
+        "Concept URI": "type:prseq",
+        "skos:notation": "prseq"
+    },
+    "transporteur·euse": {
+        "Concept URI": "type:prtra",
+        "skos:notation": "prtra"
+    },
+    "travailleur": {
+        "Concept URI": "type:prtrv",
+        "skos:notation": "prtrv"
+    },
+    "non relevé": {
+        "Concept URI": "type:prnon",
+        "skos:notation": "prnon"
+    }
+}

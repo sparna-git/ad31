@@ -1,0 +1,150 @@
+{
+    "commune": {
+        "Concept URI":"type:licom",
+        "skos:notation":"licom"
+    },
+    "cours d'eau": {
+        "Concept URI":"type:licou",
+        "skos:notation":"licou"
+    },
+    "département": {
+        "Concept URI":"type:lidep",
+        "skos:notation":"lidep"
+    },
+    "lieu-dit": {
+        "Concept URI":"type:lilie",
+        "skos:notation":"lilie"
+    },
+    "quartier": {
+        "Concept URI":"type:liqua",
+        "skos:notation":"liqua"
+    },
+    "région naturelle": {
+        "Concept URI":"type:lireg",
+        "skos:notation":"lireg"
+    },
+    "seigneurie": {
+        "Concept URI":"type:lisei",
+        "skos:notation":"lisei"
+    },
+    "abbaye": {
+        "Concept URI":"type:liabb",
+        "skos:notation":"liabb"
+    },
+    "ancienne commune": {
+        "Concept URI":"type:lianc",
+        "skos:notation":"lianc"
+    },
+    "canal": {
+        "Concept URI":"type:lican",
+        "skos:notation":"lican"
+    },
+    "cathédrale": {
+        "Concept URI":"type:licat",
+        "skos:notation":"licat"
+    },
+    "chapelle": {
+        "Concept URI":"type:lichp",
+        "skos:notation":"lichp"
+    },
+    "château": {
+        "Concept URI":"type:licha",
+        "skos:notation":"licha"
+    },
+    "chemin": {
+        "Concept URI":"type:liche",
+        "skos:notation":"liche"
+    },
+    "collège (avant 1790)": {
+        "Concept URI":"type:licol",
+        "skos:notation":"licol"
+    },
+    "domaine": {
+        "Concept URI":"type:lidom",
+        "skos:notation":"lidom"
+    },
+    "église": {
+        "Concept URI":"type:liegl",
+        "skos:notation":"liegl"
+    },
+    "exploitation agricole": {
+        "Concept URI":"type:liexp",
+        "skos:notation":"liexp"
+    },
+    "faubourg": {
+        "Concept URI":"type:lifau",
+        "skos:notation":"lifau"
+    },
+    "forge": {
+        "Concept URI":"type:lifor",
+        "skos:notation":"lifor"
+    },
+    "hôpital": {
+        "Concept URI":"type:lihop",
+        "skos:notation":"lihop"
+    },
+    "hôtel de prévôté": {
+        "Concept URI":"type:lipre",
+        "skos:notation":"lipre"
+    },
+    "hôtel de ville": {
+        "Concept URI":"type:livil",
+        "skos:notation":"livil"
+    },
+    "impasse": {
+        "Concept URI":"type:liimp",
+        "skos:notation":"liimp"
+    },
+    "monastère": {
+        "Concept URI":"type:limon",
+        "skos:notation":"limon"
+    },
+    "moulin": {
+        "Concept URI":"type:limou",
+        "skos:notation":"limou"
+    },
+    "palais archiépiscopal": {
+        "Concept URI":"type:lipal",
+        "skos:notation":"lipal"
+    },
+    "paroisse": {
+        "Concept URI":"type:lipar",
+        "skos:notation":"lipar"
+    },
+    "place": {
+        "Concept URI":"type:lipla",
+        "skos:notation":"lipla"
+    },
+    "pont": {
+        "Concept URI":"type:lipon",
+        "skos:notation":"lipon"
+    },
+    "port": {
+        "Concept URI":"type:lipor",
+        "skos:notation":"lipor"
+    },
+    "porte": {
+        "Concept URI":"type:lipot",
+        "skos:notation":"lipot"
+    },
+    "prieuré": {
+        "Concept URI":"type:lipri",
+        "skos:notation":"lipri"
+    },
+    "prison": {
+        "Concept URI":"type:liprs",
+        "skos:notation":"liprs"
+    },
+    "puit": {
+        "Concept URI":"type:lipui",
+        "skos:notation":"lipui"
+    },
+    "route": {
+        "Concept URI":"type:lirou",
+        "skos:notation":"lirou"
+    },
+    "rue": {
+        "Concept URI":"type:lirue",
+        "skos:notation":"lirue"
+    }
+}

@@ -1,0 +1,82 @@
+{
+    "abbaye, couvent, prieuré": {
+        "Concept URI": "type:clabb",
+        "skos:notation": "clabb"
+    },
+    "bureau des finances": {
+        "Concept URI": "type:clbur",
+        "skos:notation": "clbur"
+    },
+    "chapitre cathédral": {
+        "Concept URI": "type:clcca",
+        "skos:notation": "clcca"
+    },
+    "chapitre collégial": {
+        "Concept URI": "type:clcco",
+        "skos:notation": "clcco"
+    },
+    "collège (avant 1790)": {
+        "Concept URI": "type:clcol",
+        "skos:notation": "clcol"
+    },
+    "commanderie": {
+        "Concept URI": "type:clcom",
+        "skos:notation": "clcom"
+    },
+    "communauté d'habitants": {
+        "Concept URI": "type:clhab",
+        "skos:notation": "clhab"
+    },
+    "confrérie": {
+        "Concept URI": "type:clcon",
+        "skos:notation": "clcon"
+    },
+    "conseil de fabrique": {
+        "Concept URI": "type:clfab",
+        "skos:notation": "clfab"
+    },
+    "consorce de prêtres": {
+        "Concept URI": "type:clpre",
+        "skos:notation": "clpre"
+    },
+    "corporation": {
+        "Concept URI": "type:clcor",
+        "skos:notation": "clcor"
+    },
+    "diocèse": {
+        "Concept URI": "type:cldio",
+        "skos:notation": "cldio"
+    },
+    "diocèse civil": {
+        "Concept URI": "type:cldic",
+        "skos:notation": "cldic"
+    },
+    "hôpital": {
+        "Concept URI": "type:clhop",
+        "skos:notation": "clhop"
+    },
+    "juridiction": {
+        "Concept URI": "type:cljur",
+        "skos:notation": "cljur"
+    },
+    "paroisse": {
+        "Concept URI": "type:clpar",
+        "skos:notation": "clpar"
+    },
+    "seigneurie": {
+        "Concept URI": "type:clsei",
+        "skos:notation": "clsei"
+    },
+    "société commerciale": {
+        "Concept URI": "type:clsoc",
+        "skos:notation": "clsoc"
+    },
+    "syndic": {
+        "Concept URI": "type:clsyn",
+        "skos:notation": "clsyn"
+    },
+    "université": {
+        "Concept URI": "type:cluni",
+        "skos:notation": "cluni"
+    }
+}
