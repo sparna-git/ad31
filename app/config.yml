@@ -2,24 +2,31 @@
 
 source:
   # Notice principal
-  notice: 'data\SemSac_notices.xlsx'
-  # Catalog of personnes physiques
-  personphysique: 'data\others_list\SemSac_personnes_physiques.xlsx'
-  # Catalog of personnes morales
-  personnesmorales: 'data\others_list\SemSac_personnes_morales.xlsx'
-  # Catalog of juridictions
-  juri: 'data\others_list\liste_juridictions.xlsx'
-  # Lieux
-  lieux: 'data\others_list\SemSac_lieux_des_faits.xlsx'
+  notice: 'data/SemSac_notices.xlsx'
+  # Catalogue des personnes physiques
+  personphysique: 'data/catalogues/SemSac_personnes_physiques.xlsx'
+  # Catalogue de Lieux des faits
+  lieuxdesfaits: 'data/catalogues/SemSac_lieux_des_faits.xlsx'
+  # Catalogue des personnes morales
+  personnesmorales: 'data/catalogues/SemSac_personnes_morales.xlsx'
+  # Catalogue des juridictions
+  juridiction: 'data/catalogues/liste_juridictions.xlsx'
+  # 
+  arkCode: 'data/catalogues/SemSac_ark.xlsx'
+  
   #
 template:
-  conf_notice: 'data\json\notices.json'
+  conf_notice: 'data/templateJSON/notices.json'
 
 vocabularies:
-  voc_typeProfession: 'data\vocabularies\typeProfession.json'
-  voc_sexePersonnes: 'data\vocabularies\sexePersonnes.json'
-  voc_typeJuridiction: 'data\vocabularies\typeJuridiction.json'
-  voc_typeLieu: 'data\vocabularies\typeLieu.json'
-  voc_typeProcedure: 'data\vocabularies\typeProcedure.json'
-  voc_qualifFaits: 'data\vocabularies\qualifFaits.json'
-  voc_collectivite: 'data\vocabularies\typeCollectivité.json'
+  voc_typeProfession: 'data/vocabularies/typeProfession.json'
+  voc_sexePersonnes: 'data/vocabularies/sexePersonnes.json'
+  voc_typeJuridiction: 'data/vocabularies/typeJuridiction.json'
+  voc_typeLieu: 'data/vocabularies/typeLieu.json'
+  voc_typeProcedure: 'data/vocabularies/typeProcedure.json'
+  voc_qualifFaits: 'data/vocabularies/qualifFaits.json'
+  voc_collectivite: 'data/vocabularies/typeCollectivité.json'
+
+output:
+  lieux: "output/lieux"
+  notices: "output/notices"
