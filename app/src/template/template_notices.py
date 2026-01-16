@@ -1,64 +1,14 @@
-from .tools import generate_id, eval_type_data, generate_json_URI
+from src.tools import generate_id, generate_json_URI
 import logging
 import numpy as np
 
-class sacsnotices:
+class templatesJSON:
     
-    def __init__(self,tempate_notice:dict, filter):
+    def __init__(self,tempate_notice:dict):
+        
         self.template = tempate_notice
         self.logger = logging.getLogger(__name__)
-        # List of functions
-        self.filters = filter
         
-        # Update Lieux des Faits
-        dfLF = filter.get_lieux()
-        dfLF["type_voc"] = dfLF.apply(self.__add_type_lieux,axis=1)
-        dfLF["departement_URI"] = dfLF.apply(self.__update_lieux_des_faits,axis=1)
-        dfLF["insee_URI"] = dfLF.apply(self.__add_insee,axis=1)
-        self.__db_lieux_des_faits = dfLF
-    
-    # update Lieux with Departamente Id
-    def __add_type_lieux(self,data):
-        
-        if data["type_lieu"] is not None or data["type_lieu"] != "":
-            return self.filters.find_voc_lieux(data["type_lieu"])
-    
-    def __update_lieux_des_faits(self, data):
-        
-        if data["type_lieu"] == "département":
-            
-            # Template
-            templateJsonLd = self.template["lieux_des_faits"].copy()
-            
-            templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
-            # Name
-            templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],str(data["vedette"]))
-            #
-            if data["type_voc"]:
-                templateJsonLd["rico:hasOrHadPlaceType"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadPlaceType"],data["type_voc"])
-            else:
-                del templateJsonLd["rico:hasOrHadPlaceType"]
-            
-            return templateJsonLd
-        else:
-            return ""
-    
-    def __add_insee(self,data):
-        
-        if data["code_INSEE"]:
-            # insee
-            templateJsonLd = self.template["insee"].copy()
-            
-            templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
-            templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["@id"],data["code_INSEE"])
-            
-            return templateJsonLd
-        else:
-            return ""
-    
-    def __find_lieux(self, lieu:str):
-        return self.__db_lieux_des_faits[self.__db_lieux_des_faits["vedette"] == lieu.strip()]
-    
     # JSON LD Construct
     def __eval_type_element(self,element):
         
@@ -98,8 +48,22 @@ class sacsnotices:
         templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],data["id"])
         # Cote value
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["name"])
+
         # Identifiers
         templateJsonLd["rico:hasOrHadIdentifier"] = [self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadIdentifier"],identifier) for identifier in data["identifier"]]
+
+        #
+        if data["physicalCharacteristicsNote"] != "":
+            templateJsonLd["rico:physicalCharacteristicsNote"] = self.__update_value_jsonLd(templateJsonLd["rico:physicalCharacteristicsNote"],data["physicalCharacteristicsNote"])
+        else:
+            del templateJsonLd["rico:physicalCharacteristicsNote"]
+
+        #
+        if data["structure"]:
+            templateJsonLd["rico:structure"] = self.__update_value_jsonLd(templateJsonLd["rico:structure"],data["structure"])
+        else:
+            del templateJsonLd["rico:structure"]
+
         # Les sacs peuvent être issus d’une liasse
         if data["wasComponentOf_ids"]:
             templateJsonLd["rico:wasComponentOf"] = [self.__update_value_jsonLd(templateJsonLd["rico:wasComponentOf"],identifier) for identifier in data["wasComponentOf_ids"]]
@@ -107,7 +71,11 @@ class sacsnotices:
             del templateJsonLd["rico:wasComponentOf"]
             
         #Les sacs sont le support d’un contenu informationnel (est une instanciation de)
-        templateJsonLd["rico:isOrWasInstantiationOf"] = data["document"]
+        if data["document"]:
+            templateJsonLd["rico:isOrWasInstantiationOf"] = self.__update_value_jsonLd(templateJsonLd["rico:isOrWasInstantiationOf"],data["document"]["@id"])
+        else:
+            del templateJsonLd["rico:isOrWasInstantiationOf"]
+
         # Les sacs ont été produits par une ou plusieurs juridictions
         if data["hasOrganicProvenance"]:
             templateJsonLd["rico:hasOrganicProvenance"] = [self.__update_value_jsonLd(templateJsonLd["rico:hasOrganicProvenance"],identifier) for identifier in data["hasOrganicProvenance"]]
@@ -115,63 +83,14 @@ class sacsnotices:
             del templateJsonLd["rico:hasOrganicProvenance"]
             
         # Les documents documentent une procédure
-        templateJsonLd["rico:documents"] =  data["procedure"]
+        templateJsonLd["rico:documents"] =  self.__update_value_jsonLd(templateJsonLd["rico:documents"],data["procedure"])
     
         return templateJsonLd
     
     def generate_sacs(self,data: dict):
         return self._set_sacs(data,self.template["sacs"].copy())
-    
-    def __set_get_hasOrganicProvenance(self,notices:dict):
-    
-        output = []
-        if notices["Juridiction_1"]:
-            output.append(notices["Juridiction_1"]["@id"])
-        if notices["Juridiction_2"]:
-            output.append(notices["Juridiction_2"]["@id"])
-        if notices["Juridiction_3"]:
-            output.append(notices["Juridiction_3"]["@id"])
-                
-        if len(output) > 0:
-            return [generate_json_URI(juridiction) for juridiction in output]
-        return []
-        
-    def update_sacs(self, notices:dict, templateSac: dict):
-        
-        if notices["liasse"] is not None:
-            URI = generate_json_URI(notices["liasse"]["@id"])
-            
-            templateSac["rico:wasComponentOf"] = URI #self.__update_value_jsonLd(templateSac["rico:wasComponentOf"],URI)
-        else:
-            del templateSac["rico:wasComponentOf"]
-    
-        #
-        """
-        juridictions = self.__set_get_hasOrganicProvenance(notices)
-        if len(juridictions) > 0:
-            templateSac["rico:hasOrganicProvenance"] = juridictions
-        else:
-            del templateSac["rico:hasOrganicProvenance"]
-        """
-    
-        return templateSac
-    
-    def __get_URI_qualification_faits(self,qf):
-        
-        if isinstance(qf,list):
-            return [generate_json_URI(q["@id"]) for q in qf]
-        if isinstance(qf,str):
-            return generate_json_URI(qf["@id"])
-    
-    # PROCEDURE
-    def __get_uris_json(self, input):
-        
-        if isinstance(input,list):
-            return [generate_json_URI(i["@id"]) for i in input]
-            
-        if isinstance(input,str):
-            return generate_json_URI(input["@id"])
-        
+
+    # PROCEDURE         
     def __set_procedure(self,data:dict,templateProcedure: dict):
         
         
@@ -179,7 +98,7 @@ class sacsnotices:
         templateProcedure["rico:name"] = self.__update_value_jsonLd(templateProcedure["rico:name"],data["name"])
         
         if data["hasActivityType"]:
-            templateProcedure["rico:hasActivityType"] = data["hasActivityType"]
+            templateProcedure["rico:hasActivityType"] = [self.__update_value_jsonLd(templateProcedure["rico:hasActivityType"],uri) for uri in data["hasActivityType"]]
         else:
             del templateProcedure["rico:hasActivityType"]
             
@@ -189,11 +108,17 @@ class sacsnotices:
         else:
             del templateProcedure["rico:resultsOrResultedFrom"]
         
-        
         # Instruction 
-        templateProcedure["rico:hasOrHadSubevent"] = "??"
+        if data["hasOrHadSubevent"]:
+            templateProcedure["rico:hasOrHadSubevent"] = data["hasOrHadSubevent"]
+        else:
+            del templateProcedure["rico:hasOrHadSubevent"]
+
         # Une procédure peut être liée à une autre procédure ??
-        templateProcedure["rico:isAssociatedWithEvent"] = "???"        
+        if data["isAssociatedWithEvent"]:
+            templateProcedure["rico:isAssociatedWithEvent"] = [self.__update_value_jsonLd(templateProcedure["rico:isAssociatedWithEvent"],id) for id in data["isAssociatedWithEvent"] if id != ""]            
+        else:
+            del templateProcedure["rico:isAssociatedWithEvent"]
         
         if data["hasOrHadParticipant"]:
             templateProcedure["rico:hasOrHadParticipant"] = data["hasOrHadParticipant"]
@@ -209,7 +134,7 @@ class sacsnotices:
         if data["hasEndDate"]:
             templateProcedure["rico:hasEndDate"] = data["hasEndDate"]
         else:
-            templateProcedure["rico:hasEndDate"]
+            del templateProcedure["rico:hasEndDate"]
         
         return templateProcedure
     
@@ -231,14 +156,27 @@ class sacsnotices:
             
         #
         if data["nb_pieces"]:
-            templateJsonLd["rico:recordResourceExtent"] = self.__update_value_jsonLd(templateJsonLd["rico:recordResourceExtent"],data["generalDescription"])
+            templateJsonLd["rico:recordResourceExtent"] = self.__update_value_jsonLd(templateJsonLd["rico:recordResourceExtent"],data["nb_pieces"])
         else:
             del templateJsonLd["rico:recordResourceExtent"]
             
+        if data["ark_identifier"] != "":
+            templateJsonLd["rico:hasOrHadIdentifier"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadIdentifier"],data["ark_identifier"])
+        else:
+            del templateJsonLd["rico:hasOrHadIdentifier"]
+
+
         #
-        templateJsonLd["rico:hasOrHadInstantiation"] = data["hasOrHadInstantiation"]
+        if data["hasOrHadInstantiation"]:
+            templateJsonLd["rico:hasOrHadInstantiation"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadInstantiation"], "https://data.archives.haute-garonne.fr/instanciation/{}".format(data["hasOrHadInstantiation"]))
+        else:
+            del templateJsonLd["rico:hasOrHadInstantiation"]
+
         #
-        templateJsonLd["rico:documents"] = data["hasOrHadInstantiation"]
+        if data["procedure"]:
+            templateJsonLd["rico:documents"] = self.__update_value_jsonLd(templateJsonLd["rico:documents"], "https://data.archives.haute-garonne.fr/evenement/{}".format(data["procedure"]))
+        else:
+            del templateJsonLd["rico:documents"]
         
         return templateJsonLd
         
@@ -248,19 +186,18 @@ class sacsnotices:
     # Fait
     def __set_fait(self, data:dict,templateJsonLd: dict) -> dict:
         
-        #
         templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
         #
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["name"])
         #
         if data["EventType"]:
-            templateJsonLd["rico:hasEventType"] = data["EventType"]
+            templateJsonLd["rico:hasEventType"] = [self.__update_value_jsonLd(templateJsonLd["rico:hasEventType"],id) for id in data["EventType"]]
         else:
             del templateJsonLd["rico:hasEventType"]
             
         #
-        if data["Location"]:
-            templateJsonLd["rico:hasOrHadLocation"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadLocation"],data["Location"])
+        if data["hasOrHadLocation"]:
+            templateJsonLd["rico:hasOrHadLocation"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadLocation"],data["hasOrHadLocation"])
         else:
             del templateJsonLd["rico:hasOrHadLocation"]
             
@@ -269,17 +206,50 @@ class sacsnotices:
     def get_fait(self, data:dict):
         return self.__set_fait(data,self.template["fait"].copy())
     
+    # Instruction
+    def __set_instructions(self,data:dict,templateJsonLd: dict) -> dict:
+
+        
+        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
+        templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["name"])
+        
+        if data["isOrWasPerformedBy"]:
+            templateJsonLd["rico:isOrWasPerformedBy"] = self.__update_value_jsonLd(templateJsonLd["rico:isOrWasPerformedBy"],data["isOrWasPerformedBy"])
+        else:
+            del templateJsonLd["rico:isOrWasPerformedBy"]
+
+        if data["precedesInTime"]:
+            templateJsonLd["rico:precedesInTime"] = self.__update_value_jsonLd(templateJsonLd["rico:precedesInTime"],data["precedesInTime"])
+        else:
+            del templateJsonLd["rico:precedesInTime"]
+
+        if data["followsInTime"]:
+            templateJsonLd["rico:followsInTime"] = self.__update_value_jsonLd(templateJsonLd["rico:followsInTime"],data["followsInTime"])
+        else:
+            del templateJsonLd["rico:followsInTime"]
+
+        return templateJsonLd
+
+    def get_instruction(self,data):
+        return self.__set_instructions(data,self.template["instruction"].copy())
+
+
+    #########################################################
+    #
+    #   Créer json pour chaque colonne                       
+    #
+    #########################################################
     
     # Cote    
-    def _set_cote(self, cote_name:str,cote_uri,templateJsonLd: dict) -> dict:
+    def _set_cote(self, data:dict,templateJsonLd: dict) -> dict:
         
-        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],cote_uri)
-        templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],cote_name)
+        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],data["sac"])
+        templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["cote"])
         
         return templateJsonLd
         
-    def get_cote(self, cote:str, cote_Id) -> dict:
-        return self._set_cote(cote,cote_Id,self.template["cote"].copy())
+    def get_cote(self, data) -> dict:
+        return self._set_cote(data,self.template["cote"].copy())
         
     # Castan
     def __set_castan(self, castan:str, castanId:str,idx:str,templateJsonLd: dict):
@@ -296,11 +266,11 @@ class sacsnotices:
             return self.__set_castan(castan, castanId,str(idx),self.template["castan"].copy() )
 
     # Notices Dates
-    def __set_date(self,procedureId,data,templateJsonLd:dict) -> dict:
+    def __set_date(self,procedureId,date,templateJsonLd:dict) -> dict:
         
         templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],procedureId)
-        templateJsonLd["rico:expressedDate"] = self.__update_value_jsonLd(templateJsonLd["rico:expressedDate"],data)
-        templateJsonLd["rico:normalizedDateValue"] = self.__update_value_jsonLd(templateJsonLd["rico:normalizedDateValue"],data)
+        templateJsonLd["rico:expressedDate"] = self.__update_value_jsonLd(templateJsonLd["rico:expressedDate"],date)
+        templateJsonLd["rico:normalizedDateValue"] = self.__update_value_jsonLd(templateJsonLd["rico:normalizedDateValue"],date)
         
         return templateJsonLd
     
@@ -326,12 +296,6 @@ class sacsnotices:
         if intitule:
             return self.__set_intitule(intitule,templateJsonLd)
         
-    def __set_presentation_contenu(self): 
-        return ""
-    
-    def get_presentation_contenu(self):	
-        return self.__set_presentation_contenu()
-    
     # Notices Personnes
     def __set_personnes_physiques(self,person: dict, templateJsonLd:dict):
         
@@ -376,7 +340,7 @@ class sacsnotices:
             del templateJsonLd["rico:hasOrHadCorporateBodyType"]
             
         if data["json_location"]:
-            templateJsonLd["rico:agentHasOrHadLocation"] = data["json_location"]
+            templateJsonLd["rico:agentHasOrHadLocation"] = self.__update_value_jsonLd(templateJsonLd["rico:agentHasOrHadLocation"],data["json_location"])
         else:
             del templateJsonLd["rico:agentHasOrHadLocation"]
             
@@ -391,19 +355,25 @@ class sacsnotices:
         # @id
         templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
         # rico:name
-        templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["Juridiction"])
+        templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["forme_autorisee"])
         
         # find type
         typeOfJuridiction = data["type_voc"]
-        if typeOfJuridiction != "":
-            templateJsonLd["rico:hasOrHadLegalStatus"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadLegalStatus"],typeOfJuridiction)
+        if isinstance(typeOfJuridiction,list):
+            if typeOfJuridiction != "":
+                templateJsonLd["rico:hasOrHadLegalStatus"] = [self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadLegalStatus"],idType) for idType in typeOfJuridiction]
+            else:
+                del templateJsonLd["rico:hasOrHadLegalStatus"]
         else:
-            del templateJsonLd["rico:hasOrHadLegalStatus"]
+            if typeOfJuridiction != "":
+                templateJsonLd["rico:hasOrHadLegalStatus"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadLegalStatus"],typeOfJuridiction)
+            else:
+                del templateJsonLd["rico:hasOrHadLegalStatus"]
         
         # Had location
         location = data["json_location"]
         if location:
-            templateJsonLd["rico:agentHasOrHadLocation"] = location
+            templateJsonLd["rico:agentHasOrHadLocation"] = self.__update_value_jsonLd(templateJsonLd["rico:agentHasOrHadLocation"],location)
         else:
             del templateJsonLd["rico:agentHasOrHadLocation"]
         
@@ -415,29 +385,52 @@ class sacsnotices:
     # lieux_des_faits
     def __set_lieux_des_faits(self, data:dict,templateJsonLd: dict) -> dict:
         
+
         templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
         # Name
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["vedette"])
         # Type Lieu
-        if data["typeLieu"] is not None:
-            templateJsonLd["rico:hasOrHadPlaceType"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadPlaceType"],data["typeLieu"])
+        if data["type"] is not None:
+            templateJsonLd["rico:hasOrHadPlaceType"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadPlaceType"],data["type"])
         else:
             del templateJsonLd["rico:hasOrHadPlaceType"]
         
         # find departement
-        if data["departement_uri"]:
-            templateJsonLd["rico:isDirectlyContainedBy"] = self.__update_value_jsonLd(templateJsonLd["rico:isDirectlyContainedBy"],data["departement_uri"])
+        if data["json_isDirectlyContainedBy"]:
+            templateJsonLd["rico:isDirectlyContainedBy"] = self.__update_value_jsonLd(templateJsonLd["rico:isDirectlyContainedBy"],data["json_isDirectlyContainedBy"]) 
         else:
             del templateJsonLd["rico:isDirectlyContainedBy"]
-                
-        if data["insee_uri"]:
-            templateJsonLd["rico:directlyContains"] = self.__update_value_jsonLd(templateJsonLd["rico:directlyContains"],data["insee_uri"])
+
+        if data["others"]:
+            templateJsonLd["rico:directlyContains"] = self.__update_value_jsonLd(templateJsonLd["rico:directlyContains"],data["others"])
         else:
-            del templateJsonLd["rico:directlyContains"]                
+            del templateJsonLd["rico:directlyContains"]
+
+        if data["json_insee"]:
+            templateJsonLd["rico:hasOrHadIdentifier"] = data["json_insee"]
+        else:
+            del templateJsonLd["rico:hasOrHadIdentifier"]
+
+        if data["json_coordinates"]:
+            templateJsonLd["rico:hasOrHadCoordinates"] = data["json_coordinates"]
+        else:
+            del templateJsonLd["rico:hasOrHadCoordinates"]
+
         return templateJsonLd
         
     def get_lieux_des_faits(self,data:dict):
         return self.__set_lieux_des_faits(data,self.template["lieux_des_faits"].copy())
+
+    # lieux_des_faits
+    def __set_lieux_des_faits_directlyContains(self, data:dict,templateJsonLd: dict) -> dict:
+        
+        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],data["json_isDirectlyContainedBy"])
+        templateJsonLd["rico:directlyContains"] = self.__update_value_jsonLd(templateJsonLd["rico:directlyContains"],data["json"]["@id"])
+        
+        return templateJsonLd
+        
+    def get_lieux_des_faits_directlyContains(self,data:dict):
+        return self.__set_lieux_des_faits_directlyContains(data,self.template["lieux_des_faits_directlyContains"].copy())
     
     # Lieux insee
     def __set_insee(self,data, templateJsonLd: dict):
@@ -454,10 +447,14 @@ class sacsnotices:
         
         templateJsonLd["@id"] =  self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["vedette"])
+
+        if data["type"] != "":
+            templateJsonLd["rico:hasOrHadPlaceType"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadPlaceType"],data["type"])
+        else:
+            del templateJsonLd["rico:hasOrHadPlaceType"]
         
-        get_insee_id = data["json_insee"]["@id"]
-        if get_insee_id:
-            templateJsonLd["rico:hasOrHadIdentifier"] = self.__update_value_jsonLd(templateJsonLd["rico:hasOrHadIdentifier"],get_insee_id)
+        if data["json_insee"]:
+            templateJsonLd["rico:hasOrHadIdentifier"] = data["json_insee"]
         else:
             del templateJsonLd["rico:hasOrHadIdentifier"]
         
@@ -466,17 +463,6 @@ class sacsnotices:
     def get_departement(self, data: dict):
         return self.__set_departement(data,self.template["departement"].copy())
         
-    
-    # Notice qualification_faits
-    def __value__qualification_faits_type(self,qf:str):
-        
-        # find in the vocabulary
-        if isinstance(eval_type_data(qf),list):
-            new_value = [e.strip() for e in eval_type_data(qf)]
-            return [self.filters.find_voc_qualification_faits(typeQf.strip()) for typeQf in new_value if self.filters.find_voc_qualification_faits(typeQf) is not None]
-        if isinstance(eval_type_data(qf),str):
-            return self.filters.find_voc_qualification_faits(qf.strip())        
-    
     def __set_qualification_faits(self,data:dict,templateJsonLd: dict) -> dict:
         
         # Generate URI
@@ -497,11 +483,17 @@ class sacsnotices:
     # Liasses
     def __set_liasse(self,data:dict,templateJsonLd: dict) -> dict:
         
-        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],data["id"])
-        templateJsonLd["rico:title"] = self.__update_value_jsonLd(templateJsonLd["rico:title"],data["reference_sacs_liasse"])
+        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
+        templateJsonLd["rico:title"] = self.__update_value_jsonLd(templateJsonLd["rico:title"],data["title"])
+
+        #
+        if data["physicalCharacteristicsNote"] != "":
+            templateJsonLd["rico:physicalCharacteristicsNote"] = data["physicalCharacteristicsNote"]
+        else:
+            del templateJsonLd["rico:physicalCharacteristicsNote"]
         
-        if data["sac"]:
-            templateJsonLd["rico:hadComponent"] = generate_json_URI(templateJsonLd["rico:hadComponent"].format(str(data["sac"])))
+        if data["hadComponent"]:
+            templateJsonLd["rico:hadComponent"] = [self.__update_value_jsonLd(templateJsonLd["rico:hadComponent"],str(sacId)) for sacId in data["hadComponent"]]
         else:
             del templateJsonLd["rico:hadComponent"]
             
@@ -510,31 +502,22 @@ class sacsnotices:
     def get_liasse(self,data:dict):
         return self.__set_liasse(data,self.template["liasse"].copy())
     
-    # Pieces      
-    def __set_nb_pieces(self,data, templateJsonLd: dict):
-        
-        # 
-        templateJsonLd["rico:recordResourceExtent"] = self.__update_value_jsonLd(templateJsonLd["rico:recordResourceExtent"],data)
+    def __set_cotes_associees(self,data, templateJsonLd: dict):
+
+        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
+        templateJsonLd["rico:isAssociatedWithEvent"] = self.__update_value_jsonLd(templateJsonLd["rico:isAssociatedWithEvent"],str(data["procedure_cote"]))
+
         return templateJsonLd
-        
-    def get_nb_pieces(self, documentId:str,pieces):
-        
-        # Template
-        if pieces is not None or pieces != "":
-            return self.__set_nb_pieces(documentId,pieces, self.template["nb_pieces"].copy())
-            
-    
-    
-    
-    """    	    	
-    def __set_odd
-    def get_odd	
-    def __set_cotes_associees
-    def get_cotes_associees	
-    def __set_Role_juridiction_1
-    def get_Role_juridiction_1	
-    def __set_Role_juridiction_2
-    def get_Role_juridiction_2	
-    def __set_Role_juridiction_3
-    def get_Role_juridiction_3
-    """
+
+    def get_cotes_associees(self,data:dict):
+        return self.__set_cotes_associees(data,self.template["cotes_associees"].copy())
+
+    def __set_ark(self,data:dict,templateJsonLd: dict) -> dict:
+
+        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],str(data["document"]))
+        templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["ark"])
+
+        return templateJsonLd
+
+    def get_ark(self,data:str):
+        return self.__set_ark(data,self.template["ark"].copy())

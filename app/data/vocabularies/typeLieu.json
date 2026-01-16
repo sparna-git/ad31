@@ -95,6 +95,10 @@
         "Concept URI":"type:liimp",
         "skos:notation":"liimp"
     },
+    "lac": {
+        "Concept URI":"type:lilac",
+        "skos:notation":"lilac"
+    },
     "monastère": {
         "Concept URI":"type:limon",
         "skos:notation":"limon"

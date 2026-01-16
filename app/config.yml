@@ -5,12 +5,14 @@ source:
   notice: 'data/SemSac_notices.xlsx'
   # Catalogue des personnes physiques
   personphysique: 'data/catalogues/SemSac_personnes_physiques.xlsx'
-  # Catalogue de Lieux des faits
-  lieuxdesfaits: 'data/catalogues/SemSac_lieux_des_faits.xlsx'
+  # Lieux
+  lieux_Geocode: 'data/catalogues/SemSac_lieux_total_geocode.xlsx'
+  
+  
   # Catalogue des personnes morales
   personnesmorales: 'data/catalogues/SemSac_personnes_morales.xlsx'
   # Catalogue des juridictions
-  juridiction: 'data/catalogues/liste_juridictions.xlsx'
+  juridiction: 'data/catalogues/SemSac_juridictions.xlsx'
   # 
   arkCode: 'data/catalogues/SemSac_ark.xlsx'
   

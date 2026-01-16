@@ -2,7 +2,7 @@
     "sacs": {
         "@id": "https://data.archives.haute-garonne.fr/instanciation/{}",
         "@type": "rico:Instantiation",
-        "rico:name": "{}",        
+        "rico:name": { "@value": "{}", "@language": "fr" },
         "rico:hasCarrierType" : { "@id" : "type:susac" },
         "rico:physicalCharacteristicsNote" : { "@value": "{}", "@language": "fr" },
         "rico:structure": { "@value": "{}", "@language": "fr" },
@@ -14,21 +14,22 @@
     },
     "document": {
         "@id": "https://data.archives.haute-garonne.fr/archive/{}",
-        "@type": "rico:Activity",
+        "@type": "rico:RecordSet",
         "rico:name": { "@value": "{}", "@language": "fr" },
         "rico:generalDescription": { "@value": "{}", "@language": "fr" },
         "rico:recordResourceExtent": { "@value": "{}", "@type": "xsd:integer" },
-        "rico:hasOrHadInstantiation": "{}",
-        "rico:documents" : "{}"
+        "rico:hasOrHadInstantiation": { "@id" : "{}"},
+        "rico:documents" : { "@id" : "{}"},
+        "rico:hasOrHadIdentifier": { "@id" : "{}" }
     },
     "procedure": {
-        "@id": "https://data.archives.haute-garonne.fr/instanciation/{}",
+        "@id": "https://data.archives.haute-garonne.fr/evenement/{}",
         "@type": "rico:Activity",
         "rico:name": { "@value": "{}", "@language": "fr" },
-        "rico:hasActivityType" : {},
-        "rico:resultsOrResultedFrom" : {},
+        "rico:hasActivityType" : { "@id": "{}" },
+        "rico:resultsOrResultedFrom" : "{}",
         "rico:hasOrHadSubevent" : {},
-        "rico:isAssociatedWithEvent" : {},
+        "rico:isAssociatedWithEvent" : { "@id": "{}" },
         "rico:hasOrHadParticipant" : {},
         "rico:hasBeginningDate": {},
         "rico:hasEndDate": {}        
@@ -36,14 +37,15 @@
     "fait": {
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}",
         "@type": "rico:Event",
-        "rico:name": "{}",
-        "rico:hasEventType": "{}",
-        "rico:hasOrHadLocation": "{}"
+        "rico:name": { "@value": "{}", "@language": "fr" },
+        "rico:hasEventType": { "@id": "{}" },
+        "rico:hasOrHadLocation": { "@id": "{}" }
     },
     "instruction": {
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}",
         "@type": "rico:Activity",
-        "rico:name": "{}",
+        "rico:name": { "@value": "{}", "@language" : "fr" },
+        "rico:hasActivityType" : { "@id": "type:acins" },
         "rico:followsInTime" : { "@id" : "{}" },
         "rico:precedesInTime" : { "@id" : "{}" },
         "rico:isOrWasPerformedBy" : { "@id" : "{}" }
@@ -52,32 +54,31 @@
         "@id": "https://data.archives.haute-garonne.fr/instanciation/{}#cote",
         "@type": "rico:Identifier",
         "rico:name": "{}",
-        "rico:hasIdentifierType": "type:idact"        
+        "rico:hasIdentifierType": { "@id" : "type:idact" }
     },
     "castan": {
         "@id": "https://data.archives.haute-garonne.fr/instanciation/{}#castan{}",
         "@type": "rico:Identifier",
         "rico:name": "{}",
-        "rico:hasIdentifierType": "type:idcas"
+        "rico:hasIdentifierType": { "@id" : "type:idcas" }
     },
     "date_debut": {
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}#date-debut",
         "@type": "rico:Date",
         "rico:expressedDate" : {"@value":"{}","@language":"fr"},
-        "rico:normalizedDateValue": {"@value":"{}","@type":"http://www.w3.org/2001/XMLSchema#gYear"}        
+        "rico:normalizedDateValue": {"@value":"{}","@type":"xsd:gYear"}        
     },
     "date_fin": {
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}#date-fin",
         "@type": "rico:Date",
-        "rico:expressedDate" : {"value":"{}","@language":"fr"},
-        "rico:normalizedDateValue": {"value":"{}","@type":"http://www.w3.org/2001/XMLSchema#gYear"}        
+        "rico:expressedDate" : { "@value":"{}","@language":"fr"},
+        "rico:normalizedDateValue": { "@value":"{}","@type":"xsd:gYear"}        
     },
     "intitule": {
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}",
         "@type": "rico:Identifier",
         "rico:name": {"@value":"{}","@language":"fr"}
     },
-    "presentation_contenu": "",
     "personnes_physiques": {
         "@id": "https://data.archives.haute-garonne.fr/agent/{}",
         "@type": "rico:Person",
@@ -97,30 +98,35 @@
         "@type": "rico:CorporateBody",
         "rico:name": {"@value":"{}","@language":"fr"},
         "rico:hasOrHadLegalStatus" : { "@id": "https://data.archives.haute-garonne.fr/type/{}" },
-        "rico:agentHasOrHadLocation" : "{}",
+        "rico:agentHasOrHadLocation" : { "@id": "{}" },
         "rico:hasOrHadCorporateBodyType" : { "@id" : "type:cljur" }
     },
-    "Juridiction_2": "",
-    "Juridiction_3": "",
     "lieux_des_faits": {
         "@id": "https://data.archives.haute-garonne.fr/lieu/{}",
         "@type": "rico:Place",
         "rico:name": {"@value":"{}","@language":"fr"},
-        "rico:hasOrHadPlaceType": { "@id": "https://data.archives.haute-garonne.fr/type/{}" },
-        "rico:isDirectlyContainedBy": { "@id": "{}" },
-        "rico:directlyContains": { "@id": "{}" }
+        "rico:hasOrHadPlaceType": { "@id": "{}" },
+        "rico:isDirectlyContainedBy": { "@id" : "{}" },
+        "rico:directlyContains": { "@id" : "{}" },
+        "rico:hasOrHadIdentifier": {},
+        "rico:hasOrHadCoordinates": {}
+    },
+    "lieux_des_faits_directlyContains": {
+        "@id": "{}",
+        "rico:directlyContains": { "@id" : "{}" }        
     },
     "insee" : {
         "@id": "https://data.archives.haute-garonne.fr/lieu/{}#insee",
         "@type": "rico:Identifier",
         "rico:name": "{}",
-        "rico:hasIdentifierType": { " @id" : "type:ctins" }
+        "rico:hasIdentifierType": { "@id" : "type:idins" }
     },
     "departement": {
-        "@id" : "https://data.archives.haute-garonne.fr/lieu/{}#insee",
+        "@id" : "https://data.archives.haute-garonne.fr/lieu/{}",
         "@type" : "rico:Place",
-        "rico:name" : "{}",
-        "rico:hasOrHadIdentifier" : { " @id" : "{}" }
+        "rico:name" : {"@value":"{}","@language":"fr"},
+        "rico:hasOrHadPlaceType": { "@id" : "{}" },
+        "rico:hasOrHadIdentifier": {}
     },
     "qualification_faits": {
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}",
@@ -131,21 +137,24 @@
     "liasse": {
         "@id": "https://data.archives.haute-garonne.fr/instanciation/{}",
         "@type": "rico:Instantiation",
-        "rico:hadComponent": "https://data.archives.haute-garonne.fr/instanciation/{}",
-        "rico:title": {"@value":"{}","@language":"fr"}
+        "rico:title": {"@value":"{}","@language":"fr"},
+        "rico:physicalCharacteristicsNote" : { "@value": "{}", "@language": "fr" },
+        "rico:hadComponent": { "@id" : "https://data.archives.haute-garonne.fr/instanciation/{}" }
     },
     "nb_pieces": {
         "@id": "https://data.archives.haute-garonne.fr/archive/",
         "@type": "rico:RecordSet",
         "rico:recordResourceExtent": { "@value" : "{}", "@type" : "http://www.w3.org/2001/XMLSchema#integer"}
     },
-    "odd": "",
     "cotes_associees": {
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}",
         "@type": "rico:Activity",
-        "rico:isAssociatedWithEvent ": "{}"
+        "rico:isAssociatedWithEvent": { "@id" : "{}" }
     },
-    "Role_juridiction_1": "",
-    "Role_juridiction_2": "",
-    "Role_juridiction_3": ""
+    "ark": {
+        "@id": "https://data.archives.haute-garonne.fr/archive/{}#ark",
+        "@type": "rico:Identifier",
+        "rico:hasIdentifierType": { "@id" : "type:idark" },
+        "rico:name": "{}"
+    }
 }
