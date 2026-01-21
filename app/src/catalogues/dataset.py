@@ -6,7 +6,7 @@ class metadata:
         
     def __init__(self, configuration_notices: dict):
         
-        __sourceNotices = configuration_notices["source"]
+        __sourceNotices = configuration_notices["inputs"]
         __template = configuration_notices["template"]     
         __vocabularies = configuration_notices["vocabularies"]
         

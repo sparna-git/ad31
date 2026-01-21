@@ -1,6 +1,6 @@
 
 
-source:
+inputs:
   # Notice principal
   notice: 'data/SemSac_notices.xlsx'
   # Catalogue des personnes physiques
