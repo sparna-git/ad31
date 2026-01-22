@@ -73,8 +73,10 @@ class semsac:
 
         # Créer resource Personnes Morales
         print("Personnes Morales")
-        pmorales = convert_pmorales(datamarts,dflieux)
-        self.__personnesmorales = pmorales.get_personnes_morales()
+        pmorales = convert_pmorales(datamarts,dflieux).get_personnes_morales()        
+        pmorales["json"] = pmorales.apply(lambda x : self.__fin_personne_morale_in_juridiction(x),axis=1)
+        self.__personnesmorales = pmorales
+
 
     ## Chercher dans les vocabulaires
     def __find_voc_sexe(self,sexeId):
@@ -112,14 +114,26 @@ class semsac:
         
         result = ["type:acpro"]        
         if typeId != "":
-            procId = typeId.replace("affaire","procédure")
-            try:
-                if self.__type_of_procedure[procId]:
-                    result.append(self.__type_of_procedure[procId]["Concept URI"])
-                    return result
-            except Exception as e:
-                self.logger.warning(f"Qualification Fait: On ne trouve pas la procedure {typeId}.")
+
+            if "," in typeId:
+                list_types = typeId.split(",")
+                for lt in list_types:
+                    procId = lt.replace("affaire","procédure")
+                    try:
+                        if self.__type_of_procedure[procId]:
+                            result.append(self.__type_of_procedure[procId]["Concept URI"])
+                    except Exception as e:
+                        self.logger.warning(f"Qualification Fait: On ne trouve pas la procedure {procId}.")
                 return result
+            else:
+                procId = typeId.replace("affaire","procédure")
+                try:
+                    if self.__type_of_procedure[procId]:
+                        result.append(self.__type_of_procedure[procId]["Concept URI"])
+                        return result
+                except Exception as e:
+                    self.logger.warning(f"Qualification Fait: On ne trouve pas la procedure {typeId}.")
+                    return result
         else:
             return result
 
@@ -138,6 +152,17 @@ class semsac:
 
     
     ###### 
+
+    def __fin_personne_morale_in_juridiction(self,data:dict):
+
+        if data["json"] == "":
+            json = self.__find_juridictions(data["personnes_morales"])
+            if json != "":
+                return json
+            else:
+                return ""
+        else:
+            return data["json"]
 
     def __find_juridictions(self,juridictionId):
 
@@ -258,14 +283,14 @@ class semsac:
         __dfPM["personnes_morales"] = __dfPM["personnes_morales"].str.split("/")
         dfOutput = __dfPM.explode("personnes_morales").reset_index(drop=False)
         dfOutput["personnes_morales"] = dfOutput["personnes_morales"].str.strip()
-        # Join with the Personnes Morales 
+        # Join with the Personnes Morales
         dfpm = pd.merge(dfOutput, self.__personnesmorales[["personnes_morales","type_pm","json"]], on="personnes_morales", how="left")
         # Read dataframe
-        dfPMClean = dfpm.replace(np.nan,"")
+        dfpm.replace(np.nan,"",inplace=True)
         # Log
-        dfPMClean.apply(lambda x : self.logger.warning(f"Personne Morale: On ne trouve pas le code Json de <<{x["personnes_morales"]}>>") if x["json"] == "" else "",axis=1)
+        dfpm.apply(lambda x : self.logger.warning(f"Personne Morale: On ne trouve pas le code Json de <<{x["personnes_morales"]}>>") if x["json"] == "" else "",axis=1)
         
-        return dfPMClean[["cote","personnes_morales","type_pm","json"]]
+        return dfpm[["cote","personnes_morales","type_pm","json"]]
 
     def get_personnes_morales(self) -> pd.DataFrame:
         return self.__set_personnes_morales()
@@ -329,18 +354,19 @@ class semsac:
             j1 = {}
 
             j1["name"] = f"Première instruction de \"{title}\""
-            j1["isOrWasPerformedBy"] = data["json_j1"]["@id"]
+            # Valider si on a le json de la juridiction
+            j1["isOrWasPerformedBy"] = data["json_j1"] #["@id"]
 
             if data["Juridiction_2"] != "":
                 if data["json_j2"] != "":
-                    j1["precedesInTime"] = data["json_j2"]["@id"]
+                    j1["precedesInTime"] = data["json_j2"]#["@id"]
                 else:
                     j1["precedesInTime"] = ""    
             else:
                 j1["precedesInTime"] = ""
 
             if data["Juridiction_2"] == "" and data["Juridiction_3"] != "":
-                j1["precedesInTime"] = data["json_j3"]["@id"]
+                j1["precedesInTime"] = data["json_j3"]#["@id"]
             else:
                 j1["precedesInTime"] = ""
 
@@ -354,18 +380,18 @@ class semsac:
 
             j2["name"] = f"Deuxième instruction de \"{title}\""
             if data["json_j2"] != "":
-                j2["isOrWasPerformedBy"] = data["json_j2"]["@id"]
+                j2["isOrWasPerformedBy"] = data["json_j2"]#["@id"]
             else:
                 self.logger.warning(f"Instruction: Error dans la cote {data["cote"]} ne se troue pas l'information de la Juridiction 2 : {data["Juridiction_2"]}")
                 j2["isOrWasPerformedBy"] = ""
 
             if data["Juridiction_3"] != "":
-                j2["precedesInTime"] = data["json_j3"]["@id"]
+                j2["precedesInTime"] = data["json_j3"]#["@id"]
             else:
                 j2["precedesInTime"] = ""
 
             if data["Juridiction_1"] != "":
-                j2["followsInTime"] = data["json_j1"]["@id"]
+                j2["followsInTime"] = data["json_j1"]#["@id"]
             else:
                 j2["followsInTime"] = ""
 
@@ -378,7 +404,7 @@ class semsac:
             j3["name"] = f"Troisième instruction de \"{title}\""
             if data["json_j3"] != "":
                 self.logger.warning(f"Instruction: Error dans la cote {data["cote"]} ne se troue pas l'information de la Juridiction 3 : {data["Juridiction_3"]}")
-                j3["isOrWasPerformedBy"] = data["json_j3"]["@id"]
+                j3["isOrWasPerformedBy"] = data["json_j3"]#["@id"]
             else:
                 j3["isOrWasPerformedBy"] = ""
 
@@ -386,14 +412,14 @@ class semsac:
 
             if data["Juridiction_2"] != "":
                 if data["json_j2"] != "":
-                    j3["followsInTime"] = data["json_j2"]["@id"]
+                    j3["followsInTime"] = data["json_j2"]#["@id"]
                 else:
                     j3["followsInTime"] = ""
             else:
                 j3["followsInTime"] = ""
 
             if data["Juridiction_2"] == "" and data["Juridiction_1"] != "":
-                j3["followsInTime"] = data["json_j1"]["@id"]
+                j3["followsInTime"] = data["json_j1"]#["@id"]
             else:
                 j3["followsInTime"] = ""
 
@@ -465,27 +491,30 @@ class semsac:
         __df["qualification_faits"] = __df["qualification_faits"].str.strip()
 
         # Recupere tous les qualite des faires
-        __dfEventType = __df[~__df["qualification_faits"].apply(lambda x : x.startswith("affaire"))]
+        __dfEventType = __df[~__df["qualification_faits"].isin(["affaire criminelle","affaire civile"])]
+        __dfEventType.drop_duplicates(inplace=True) 
         
         # Recupere tous les affaires XXXX pour la procedure
-        __dfProc = __df[__df["qualification_faits"].apply(lambda x : x.startswith("affaire"))]
-        
+        __dfProc = __df[__df["qualification_faits"].isin(["affaire criminelle","affaire civile"])]
+        __dfProc.drop_duplicates(inplace=True)
+        __dfProcGpo = __dfProc.groupby(["cote"]).agg({"qualification_faits": lambda x: ",".join(x)}).reset_index()
         
         qfEvents = pd.Series(__dfEventType["cote"]).unique()
         __cotes_add_proc = []
         for qfeCote in qfEvents:
-            __dfProcId = __dfProc[__dfProc["cote"] == qfeCote]
+            __dfProcId = __dfProcGpo[__dfProcGpo["cote"] == qfeCote]
             if len(__dfProcId) == 0:
                 __cotes_add_proc.append((qfeCote,""))
 
         __dfProcedure = None
         if len(__cotes_add_proc) > 0:
             __dfCotesAditional = pd.DataFrame(__cotes_add_proc,columns=["cote","qualification_faits"])
-            __dfProcedure = pd.concat([__dfProc,__dfCotesAditional])
+            __dfProcedure = pd.concat([__dfProcGpo,__dfCotesAditional])
         else:
-            __dfProcedure = __dfProc
+            __dfProcedure = __dfProcGpo
 
         __dfProcedure["procType"] = __dfProcedure["qualification_faits"].apply(lambda x : self.__find_voc_typeProcedure(x))
+        
 
         # Chercher dans les cotes de procedures que n'existe pas dans le qualifications faits
         __cotes_proc = pd.Series(__dfProc["cote"]).unique()
@@ -504,8 +533,8 @@ class semsac:
         
         # Add le type de Qualification faits        
         __dfQF["EventType"] = __dfQF["qualification_faits"].apply(lambda x : self.__find_voc_qualification_faits(x))
-        
-        return __dfQF[["cote","id","qualification_faits","EventType"]], __dfProcedure[["cote","id","qualification_faits","procType"]]
+      
+        return __dfQF[["cote","qualification_faits","EventType"]], __dfProcedure[["cote","qualification_faits","procType"]]
 
     def get_qualification_faits(self):
         return self.__set_qualification_faits()

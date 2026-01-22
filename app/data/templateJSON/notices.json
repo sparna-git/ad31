@@ -109,7 +109,7 @@
         "rico:isDirectlyContainedBy": { "@id" : "{}" },
         "rico:directlyContains": { "@id" : "{}" },
         "rico:hasOrHadIdentifier": {},
-        "rico:hasOrHadCoordinates": {}
+        "rico:geographicalCoordinates": {"@value":"{}", "@type": "geo:wktLiteral"}
     },
     "lieux_des_faits_directlyContains": {
         "@id": "{}",

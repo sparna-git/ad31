@@ -49,12 +49,15 @@ class convert_juridictions:
             return df["json"].iloc[0]["@id"]
 
     def __get_type_juridiction(self, typeId):
-        
-        try:
-            if self.__voc_type_juridiction[typeId]:
-                return self.__voc_type_juridiction[typeId]["Concept URI"]
-        except Exception as e:
-            self.logger.warning(f"Juridiction: On ne trove pas le type de juridiction: {typeId}, la valeur par défaut type:junon")
+
+        if typeId != "":
+            try:
+                if self.__voc_type_juridiction[typeId]:
+                    return self.__voc_type_juridiction[typeId]["Concept URI"]
+            except Exception as e:
+                self.logger.warning(f"Juridiction: On ne trove pas le type de juridiction: {typeId}, la valeur par défaut type:junon")
+                return "type:junon"
+        else:
             return "type:junon"
     
     def __find_voc_juridiction(self,typeId):

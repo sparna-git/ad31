@@ -214,17 +214,17 @@ class templatesJSON:
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["name"])
         
         if data["isOrWasPerformedBy"]:
-            templateJsonLd["rico:isOrWasPerformedBy"] = self.__update_value_jsonLd(templateJsonLd["rico:isOrWasPerformedBy"],data["isOrWasPerformedBy"])
+            templateJsonLd["rico:isOrWasPerformedBy"] = data["isOrWasPerformedBy"] #self.__update_value_jsonLd(templateJsonLd["rico:isOrWasPerformedBy"],data["isOrWasPerformedBy"])
         else:
             del templateJsonLd["rico:isOrWasPerformedBy"]
 
         if data["precedesInTime"]:
-            templateJsonLd["rico:precedesInTime"] = self.__update_value_jsonLd(templateJsonLd["rico:precedesInTime"],data["precedesInTime"])
+            templateJsonLd["rico:precedesInTime"] = data["precedesInTime"] #self.__update_value_jsonLd(templateJsonLd["rico:precedesInTime"],data["precedesInTime"])
         else:
             del templateJsonLd["rico:precedesInTime"]
 
         if data["followsInTime"]:
-            templateJsonLd["rico:followsInTime"] = self.__update_value_jsonLd(templateJsonLd["rico:followsInTime"],data["followsInTime"])
+            templateJsonLd["rico:followsInTime"] = data["followsInTime"] #self.__update_value_jsonLd(templateJsonLd["rico:followsInTime"],data["followsInTime"])
         else:
             del templateJsonLd["rico:followsInTime"]
 
@@ -385,7 +385,6 @@ class templatesJSON:
     # lieux_des_faits
     def __set_lieux_des_faits(self, data:dict,templateJsonLd: dict) -> dict:
         
-
         templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
         # Name
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["vedette"])
@@ -411,10 +410,10 @@ class templatesJSON:
         else:
             del templateJsonLd["rico:hasOrHadIdentifier"]
 
-        if data["json_coordinates"]:
-            templateJsonLd["rico:hasOrHadCoordinates"] = data["json_coordinates"]
+        if data["geocode"] != "":
+            templateJsonLd["rico:geographicalCoordinates"] = self.__update_value_jsonLd(templateJsonLd["rico:geographicalCoordinates"],data["geocode"]) 
         else:
-            del templateJsonLd["rico:hasOrHadCoordinates"]
+            del templateJsonLd["rico:geographicalCoordinates"]
 
         return templateJsonLd
         
@@ -432,6 +431,16 @@ class templatesJSON:
     def get_lieux_des_faits_directlyContains(self,data:dict):
         return self.__set_lieux_des_faits_directlyContains(data,self.template["lieux_des_faits_directlyContains"].copy())
     
+
+    def __set__geocode_lieux(self,data:dict, templateJsonLd: dict):
+        
+        templateJsonLd["@id"] =  self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
+        templateJsonLd["rico:geographicalCoordinates"] = self.__update_value_jsonLd(templateJsonLd["rico:geographicalCoordinates"],data)
+        return templateJsonLd
+
+    def get_geocode_lieux(self,data):
+        return self.__set__geocode_lieux(data,self.template["geocode"].copy())
+
     # Lieux insee
     def __set_insee(self,data, templateJsonLd: dict):
         
