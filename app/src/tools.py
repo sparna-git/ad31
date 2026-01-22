@@ -6,7 +6,23 @@ import json
 # https://docs.python.org/3/library/uuid.html
 '''  UUID objects according to RFC 9562 '''
 import uuid
+from pathlib import Path
+import shutil
 
+# OS
+
+def create_directory(path_dir:str):
+    """
+        Create directory if not exists
+    """
+    if not Path(path_dir).exists():
+        Path(path_dir).mkdir(parents=True, exist_ok=True)
+    else:
+        shutil.rmtree(path_dir)
+        Path(path_dir).mkdir(parents=True, exist_ok=True)
+    
+
+# Yaml
 
 def read_yaml(YamlFile):
     __fileYml = open(YamlFile,'r')

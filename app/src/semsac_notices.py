@@ -27,6 +27,7 @@ class semsac:
         #
         self.logger = logging.basicConfig(
                             filename='app.log',  # Nom du fichier de log
+                            filemode='w',
                             level=logging.DEBUG,  # Niveau de log
                             format='%(asctime)s - %(name)s  - %(levelname)s - %(message)s'  # Format du log
                         ) 
@@ -39,8 +40,11 @@ class semsac:
         # Lire les fichiers sources
         datamarts = metadata(configuration)
         self.datamarts = datamarts
+
+        # Directory output notices
+        self.get_directory_notices = datamarts.get_directory_notices
         
-        # 
+        # Templates JSON-LD 
         __templateJsonLD = datamarts.get_conf_notices()
         self.__json_notice = templatesJSON(__templateJsonLD)
         self.notices = datamarts.get_noticies_db()

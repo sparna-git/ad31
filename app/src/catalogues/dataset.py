@@ -1,4 +1,4 @@
-from src.tools import load_df, read_json_str, generate_json_URI, generate_id
+from src.tools import load_df, read_json_str, generate_json_URI, generate_id, create_directory
 import logging
 import pandas as pd
 
@@ -9,6 +9,7 @@ class metadata:
         __sourceNotices = configuration_notices["inputs"]
         __template = configuration_notices["template"]     
         __vocabularies = configuration_notices["vocabularies"]
+        __output_results = configuration_notices["output"]
         
         self.__notice = __sourceNotices["notice"]
         self.__personPhysiques = __sourceNotices["personphysique"]
@@ -31,6 +32,13 @@ class metadata:
         self.__voc_collectivite = __vocabularies["voc_collectivite"]
         # Logging
         self.logger = logging.getLogger(__name__)
+
+        # Create directories
+        self.get_directory_lieux = __output_results["lieux"]
+        create_directory(__output_results["lieux"])
+        self.get_directory_notices = __output_results["notices"]
+        create_directory(__output_results["notices"])
+
         
     def __df_notices(self):
         """

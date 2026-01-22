@@ -33,7 +33,10 @@ class convert:
         self.__dfInstructions = self.__resource.get_instruction_juridiction()
         self.__ark_code = self.__resource.get_ark_code()        
 
-        # 
+        # Directory output notices
+        self.__get_directory_notices = self.__resource.get_directory_notices
+
+        # Templates JSON-LD
         __templateJsonLD = self.__resource.datamarts.get_conf_notices()
         self.__json_notice = templatesJSON(__templateJsonLD) 
     
@@ -302,9 +305,9 @@ class convert:
         # Generate JSON 
         json_output_string = convert_json_context(json_code)
         # Ecrir un fichier JSON
-        write_json_file(f"output/notices/json/semsac_{name_file}.json",json_output_string)
+        #write_json_file(f"{self.__get_directory_notices}/semsac_{name_file}.json",json_output_string)
         # Ecrir un fichier graph
-        convert_to_turtle(f"output/notices/turtle/semsac_{name_file}.ttl",json_output_string)
+        convert_to_turtle(f"{self.__get_directory_notices}/semsac_{name_file}.ttl",json_output_string)
 
     # Leture de notices
     def read_notices(self):

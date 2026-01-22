@@ -15,6 +15,8 @@ class convert_lieux:
         self.__json_notice = templatesJSON(__templateJsonLD)
         # Login
         self.logger = logging.getLogger(__name__)
+        # Directory Output
+        self.__get_directory_lieux = datamarts.get_directory_lieux
 
 
         # Vocabulaire Type de Lieux
@@ -124,9 +126,9 @@ class convert_lieux:
         [json_lieux_full.append(j) for j in self.__dfInsee["json"].to_list() ]
 
         json_output = convert_json_context(json_lieux_full)
-        write_json_file("output/lieux/lieux_result.json",json_output)
-        convert_to_turtle("output/lieux/lieux_result.ttl",json_output)
-
+        #write_json_file(f"{self.__get_directory_lieux}/lieux_result.json",json_output)
+        convert_to_turtle(f"{self.__get_directory_lieux}/lieux_result.ttl",json_output)
+        
         # Concat all lieux des faits        
         dfLieuxResult = pd.concat([self.__dfLieux[["vedette","departement","commune","type_lieu","json"]],self.__dfCommune[["vedette","departement","commune","type_lieu","json"]],self.__dfDepartement[["vedette","departement","commune","type_lieu","json"]]])
         
