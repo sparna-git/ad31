@@ -17,6 +17,8 @@ class metadata:
         self.__personnes_morales = __sourceNotices["personnesmorales"]
         # Lieux
         self.__lieux_Geocode = __sourceNotices["lieux_Geocode"]
+        # Lieux Juridiction
+        self.__lieux_juridiction = __sourceNotices["lieux_juridiction"]
 
         self.__conf_notices = __template["conf_notice"]
         # Vocabulaires
@@ -64,6 +66,13 @@ class metadata:
 
     def get_catalogue_liuex_GeoCode(self) -> pd.DataFrame:
         return self.__set_catalogue_liuex_Geocode()
+
+    def __set_catalogue_liuex_juridiction(self) -> pd.DataFrame:
+        return load_df(self.__lieux_Geocode)
+
+    def get_catalogue_liuex_juridiction(self) -> pd.DataFrame:
+        return self.__set_catalogue_liuex_Geocode()
+
 
     # Code ARK    
     def __set_df_ark_code(self) -> pd.DataFrame:

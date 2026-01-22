@@ -19,8 +19,16 @@ class convert_lieux:
 
         # Vocabulaire Type de Lieux
         self.__type_of_lieux = datamarts.get_voc_Lieux()
+
+        # DataFrames Lieux
+        __dflieux_juridiction = datamarts.get_catalogue_liuex_juridiction()
+        __dflieux_geo_code_input = datamarts.get_catalogue_liuex_GeoCode() # Lieux Geo Code
+
+        __dflieux_geo_code = pd.concat([__dflieux_geo_code_input,__dflieux_juridiction])
+        __dflieux_geo_code.drop_duplicates(inplace=True) 
+
         # Lieux Dataset
-        __dflieux_geo_code = datamarts.get_catalogue_liuex_GeoCode() # Lieux Geo Code
+        
         __dflieux_geo_code["departement"] = __dflieux_geo_code["departement"].str.strip()
         __dflieux_geo_code["commune"] = __dflieux_geo_code["commune"].str.strip()
         __dflieux_geo_code["code_INSEE"] = __dflieux_geo_code["code_INSEE"].str.strip()
@@ -51,6 +59,8 @@ class convert_lieux:
         __geo_code_commune["json_isDirectlyContainedBy"] = __geo_code_commune["departement"].apply(lambda x : self.__find_departement(x) if x != "" else "")
         __geo_code_commune["json_insee"] = __geo_code_commune["code_INSEE"].apply( lambda x : __dfCodeInsee[__dfCodeInsee["code_INSEE"] == x]["json"].iloc[0] if x != "" else "")
         __geo_code_commune["others"] = ""
+        __geo_code_commune["geocode"] = __geo_code_commune.apply( lambda x : f'POINT({x["longitude"]} {x["latitude"]})' if x["latitude"] != "" and x["longitude"] != "" else "", axis=1)
+        #__geo_code_commune.to_csv("geo_commune_debug.csv",index=False)
         __geo_code_commune["json"] = __geo_code_commune.apply(lambda x : self.__json_notice.get_lieux_des_faits(x), axis=1)
         self.__dfCommune = __geo_code_commune
         # Fichier Log
@@ -62,6 +72,7 @@ class convert_lieux:
         __geo_Lieux["json_isDirectlyContainedBy"] = __geo_Lieux["commune"].apply(lambda x : self.__find_commune(x))
         __geo_Lieux["json_insee"] = __geo_Lieux["code_INSEE"].apply( lambda x : __dfCodeInsee[__dfCodeInsee["code_INSEE"] == x]["json"].iloc[0] if x != "" else "")
         __geo_Lieux["others"] = ""
+        __geo_Lieux["geocode"] = ""
         __geo_Lieux["json"] = __geo_Lieux.apply(lambda x : self.__json_notice.get_lieux_des_faits(x), axis=1)
         __geo_Lieux["json_directlyContains"] = __geo_Lieux.apply(lambda x : self.__json_notice.get_lieux_des_faits_directlyContains(x) if x["commune"] != "" else "", axis=1)
         self.__dfLieux = __geo_Lieux

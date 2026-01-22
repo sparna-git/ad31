@@ -61,7 +61,8 @@ def convert_json_context(graph):
                                 "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
                                 "xsd": "http://www.w3.org/2001/XMLSchema#",
                                 "type": "https://data.archives.haute-garonne.fr/type/",
-                                "xsd": "http://www.w3.org/2001/XMLSchema#"
+                                "xsd": "http://www.w3.org/2001/XMLSchema#",
+                                "geo": "http://www.opengis.net/ont/geosparql#"
                             }
     json_lieux["@graph"] = graph
 

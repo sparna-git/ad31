@@ -67,7 +67,6 @@ class convert_juridictions:
         else:
             return self.__get_type_juridiction(str(typeId).lower().strip())
     
-    
     def read_data(self) -> pd.DataFrame:
 
         return self.__juridiction

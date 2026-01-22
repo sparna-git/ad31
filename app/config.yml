@@ -7,6 +7,8 @@ inputs:
   personphysique: 'data/catalogues/SemSac_personnes_physiques.xlsx'
   # Lieux
   lieux_Geocode: 'data/catalogues/SemSac_lieux_total_geocode.xlsx'
+  # Lieux Juridiction
+  lieux_juridiction: 'data/catalogues/SemSac_lieux_juridictions.xlsx'
   
   
   # Catalogue des personnes morales
