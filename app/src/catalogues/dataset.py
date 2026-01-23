@@ -76,10 +76,10 @@ class metadata:
         return self.__set_catalogue_liuex_Geocode()
 
     def __set_catalogue_liuex_juridiction(self) -> pd.DataFrame:
-        return load_df(self.__lieux_Geocode)
+        return load_df(self.__lieux_juridiction)
 
     def get_catalogue_liuex_juridiction(self) -> pd.DataFrame:
-        return self.__set_catalogue_liuex_Geocode()
+        return self.__set_catalogue_liuex_juridiction()
 
 
     # Code ARK    

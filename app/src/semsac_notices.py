@@ -81,7 +81,6 @@ class semsac:
         pmorales["json"] = pmorales.apply(lambda x : self.__fin_personne_morale_in_juridiction(x),axis=1)
         self.__personnesmorales = pmorales
 
-
     ## Chercher dans les vocabulaires
     def __find_voc_sexe(self,sexeId):
         
@@ -169,7 +168,7 @@ class semsac:
             return data["json"]
 
     def __find_juridictions(self,juridictionId):
-
+        
         df = self.__juridiction[self.__juridiction["forme_autorisee"] == juridictionId]
         if len(df) > 0:
             return df["json"].iloc[0]
@@ -352,25 +351,28 @@ class semsac:
     def __json_instruction(self,data:dict) -> list:
 
         json_instruction = []
+        # Id"s
+        j1_id = str(generate_id())
+        j2_id = str(generate_id())
+        j3_id = str(generate_id())
+        
         title = self.get_titles()[self.get_titles()["cote"] == data["cote"]]["intitule"].iloc[0]
         # Juridiction 1
         if data["Juridiction_1"] != "":
             j1 = {}
 
+            j1["id"] = j1_id
             j1["name"] = f"Première instruction de \"{title}\""
             # Valider si on a le json de la juridiction
-            j1["isOrWasPerformedBy"] = data["json_j1"] #["@id"]
+            j1["isOrWasPerformedBy"] = data["json_j1"]
 
             if data["Juridiction_2"] != "":
-                if data["json_j2"] != "":
-                    j1["precedesInTime"] = data["json_j2"]#["@id"]
-                else:
-                    j1["precedesInTime"] = ""    
+                j1["precedesInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j2_id}"
             else:
                 j1["precedesInTime"] = ""
 
             if data["Juridiction_2"] == "" and data["Juridiction_3"] != "":
-                j1["precedesInTime"] = data["json_j3"]#["@id"]
+                j1["precedesInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j3_id}"
             else:
                 j1["precedesInTime"] = ""
 
@@ -382,20 +384,21 @@ class semsac:
         if data["Juridiction_2"] != "":
             j2 = {}
 
+            j2["id"] = j2_id
             j2["name"] = f"Deuxième instruction de \"{title}\""
             if data["json_j2"] != "":
-                j2["isOrWasPerformedBy"] = data["json_j2"]#["@id"]
+                j2["isOrWasPerformedBy"] = data["json_j2"]
             else:
                 self.logger.warning(f"Instruction: Error dans la cote {data["cote"]} ne se troue pas l'information de la Juridiction 2 : {data["Juridiction_2"]}")
                 j2["isOrWasPerformedBy"] = ""
 
             if data["Juridiction_3"] != "":
-                j2["precedesInTime"] = data["json_j3"]#["@id"]
+                j2["precedesInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j3_id}"
             else:
                 j2["precedesInTime"] = ""
 
             if data["Juridiction_1"] != "":
-                j2["followsInTime"] = data["json_j1"]#["@id"]
+                j2["followsInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j1_id}"
             else:
                 j2["followsInTime"] = ""
 
@@ -405,10 +408,11 @@ class semsac:
         if data["Juridiction_3"] != "":
             j3 = {}
 
+            j3["id"] = j3_id
             j3["name"] = f"Troisième instruction de \"{title}\""
             if data["json_j3"] != "":
                 self.logger.warning(f"Instruction: Error dans la cote {data["cote"]} ne se troue pas l'information de la Juridiction 3 : {data["Juridiction_3"]}")
-                j3["isOrWasPerformedBy"] = data["json_j3"]#["@id"]
+                j3["isOrWasPerformedBy"] = data["json_j3"]
             else:
                 j3["isOrWasPerformedBy"] = ""
 
@@ -416,14 +420,14 @@ class semsac:
 
             if data["Juridiction_2"] != "":
                 if data["json_j2"] != "":
-                    j3["followsInTime"] = data["json_j2"]#["@id"]
+                    j3["followsInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j2_id}"
                 else:
                     j3["followsInTime"] = ""
             else:
                 j3["followsInTime"] = ""
 
             if data["Juridiction_2"] == "" and data["Juridiction_1"] != "":
-                j3["followsInTime"] = data["json_j1"]#["@id"]
+                j3["followsInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j1_id}"
             else:
                 j3["followsInTime"] = ""
 
@@ -546,10 +550,6 @@ class semsac:
     def __set_liasses(self) -> pd.DataFrame:
     
         df = self.notices[["intitule_liasse","reference_sacs_liasse"]]
-        #__dfLiasses = __df[__df["reference_sacs_liasse"] != ""]
-        #__dfLiasses["intitule_liasse"] = __dfLiasses["intitule_liasse"].str.strip()
-        # Sort and 
-        #__dfLiasses["reference_sacs_liasse"] = dfLiasses["reference_sacs_liasse"].apply(lambda x : self.__liasses_ref_sort(x))
         
         df["reference_sacs_liasse"] = df["reference_sacs_liasse"].str.split('/')
         df_ = df.explode("reference_sacs_liasse").reset_index(drop=False)

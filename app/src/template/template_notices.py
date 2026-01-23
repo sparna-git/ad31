@@ -210,7 +210,7 @@ class templatesJSON:
     def __set_instructions(self,data:dict,templateJsonLd: dict) -> dict:
 
         
-        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],generate_id())
+        templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],data["id"])
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["name"])
         
         if data["isOrWasPerformedBy"]:
@@ -219,12 +219,12 @@ class templatesJSON:
             del templateJsonLd["rico:isOrWasPerformedBy"]
 
         if data["precedesInTime"]:
-            templateJsonLd["rico:precedesInTime"] = data["precedesInTime"] #self.__update_value_jsonLd(templateJsonLd["rico:precedesInTime"],data["precedesInTime"])
+            templateJsonLd["rico:precedesInTime"] = self.__update_value_jsonLd(templateJsonLd["rico:precedesInTime"],data["precedesInTime"])
         else:
             del templateJsonLd["rico:precedesInTime"]
 
         if data["followsInTime"]:
-            templateJsonLd["rico:followsInTime"] = data["followsInTime"] #self.__update_value_jsonLd(templateJsonLd["rico:followsInTime"],data["followsInTime"])
+            templateJsonLd["rico:followsInTime"] = self.__update_value_jsonLd(templateJsonLd["rico:followsInTime"],data["followsInTime"])
         else:
             del templateJsonLd["rico:followsInTime"]
 

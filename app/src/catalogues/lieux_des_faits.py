@@ -24,9 +24,16 @@ class convert_lieux:
 
         # DataFrames Lieux
         __dflieux_juridiction = datamarts.get_catalogue_liuex_juridiction()
+        __dflieux_juridiction.drop(["provenance"], axis=1,inplace=True)
+        __dflieux_juridiction["latitude"] = ""
+        __dflieux_juridiction["longitude"] = ""
+        
         __dflieux_geo_code_input = datamarts.get_catalogue_liuex_GeoCode() # Lieux Geo Code
-
-        __dflieux_geo_code = pd.concat([__dflieux_geo_code_input,__dflieux_juridiction])
+        
+        # Chercher les lieux qui n'existe pas dans le fichier de geo code
+        __dfJur = __dflieux_juridiction[~__dflieux_juridiction["vedette"].isin(__dflieux_geo_code_input["vedette"].to_list())]
+        # Ajouter les lieux qui ne sont pas dans le geo code
+        __dflieux_geo_code = pd.concat([__dflieux_geo_code_input,__dfJur])
         __dflieux_geo_code.drop_duplicates(inplace=True) 
 
         # Lieux Dataset
