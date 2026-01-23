@@ -368,16 +368,13 @@ class semsac:
 
             if data["Juridiction_2"] != "":
                 j1["precedesInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j2_id}"
-            else:
-                j1["precedesInTime"] = ""
-
-            if data["Juridiction_2"] == "" and data["Juridiction_3"] != "":
+            elif data["Juridiction_2"] == "" and data["Juridiction_3"] != "":
                 j1["precedesInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j3_id}"
             else:
                 j1["precedesInTime"] = ""
 
             j1["followsInTime"] = ""
-
+            
             json_instruction.append(self.__json_notice.get_instruction(j1))
 
         # Juridiction 2
@@ -419,14 +416,8 @@ class semsac:
             j3["precedesInTime"] = ""
 
             if data["Juridiction_2"] != "":
-                if data["json_j2"] != "":
-                    j3["followsInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j2_id}"
-                else:
-                    j3["followsInTime"] = ""
-            else:
-                j3["followsInTime"] = ""
-
-            if data["Juridiction_2"] == "" and data["Juridiction_1"] != "":
+                j3["followsInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j2_id}"                
+            elif data["Juridiction_2"] == "" and data["Juridiction_1"] != "":
                 j3["followsInTime"] = f"https://data.archives.haute-garonne.fr/evenement/{j1_id}"
             else:
                 j3["followsInTime"] = ""
@@ -453,6 +444,7 @@ class semsac:
         __dfJuridiction.replace(np.nan,"",inplace=True)
         __dfOperation = __dfJuridiction[__dfJuridiction["Juridiction_1"] != ""]
         __dfOperation["json"] = __dfOperation.apply(lambda x : self.__json_instruction(x), axis=1)
+        #__dfOperation.to_csv("catalogo de instruccion.csv",index=False)
 
         return __dfOperation
 
@@ -609,8 +601,7 @@ class semsac:
         __dfOper["procedure_cote"] = __dfOper["procedure_cote"].apply(lambda x : f"https://data.archives.haute-garonne.fr/evenement/{x}" if x != "" else "")
         # 
         #__dfOper["json"] = __dfOper.apply(lambda x : self.__json_notice.get_cotes_associees(x) if str(x["procedure_cote"]) != "" else "", axis=1)
-        __dfOper.to_csv("cotes_associees.csv",index=False)
-
+        
         dfCA = __dfOper[__dfOper["procedure_cote"] != ""]
 
         return dfCA

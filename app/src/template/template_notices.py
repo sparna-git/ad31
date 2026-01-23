@@ -209,7 +209,6 @@ class templatesJSON:
     # Instruction
     def __set_instructions(self,data:dict,templateJsonLd: dict) -> dict:
 
-        
         templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],data["id"])
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["name"])
         
