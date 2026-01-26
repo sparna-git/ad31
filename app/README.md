@@ -12,9 +12,8 @@
 
 ## Prérequis logiciels
 
-- Python version xxxxx
-- Poetry etc...
-- etc...
+- Python version 3.12
+- Poetry version 0.1.0
 
 ## Avant de lancer la conversion
 

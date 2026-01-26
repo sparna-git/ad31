@@ -45,6 +45,7 @@
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}",
         "@type": "rico:Activity",
         "rico:name": { "@value": "{}", "@language" : "fr" },
+        "rico:order": "{}",
         "rico:hasActivityType" : { "@id": "type:acins" },
         "rico:followsInTime" : { "@id" : "{}" },
         "rico:precedesInTime" : { "@id" : "{}" },
@@ -137,6 +138,7 @@
     "liasse": {
         "@id": "https://data.archives.haute-garonne.fr/instanciation/{}",
         "@type": "rico:Instantiation",
+        "rico:hasCarrierType" : { "@id" : "type:sulia" },
         "rico:title": {"@value":"{}","@language":"fr"},
         "rico:physicalCharacteristicsNote" : { "@value": "{}", "@language": "fr" },
         "rico:hadComponent": { "@id" : "https://data.archives.haute-garonne.fr/instanciation/{}" }

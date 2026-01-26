@@ -240,7 +240,7 @@ class convert:
     def __generate_sac(self,notice:dict) -> dict:
         
         print(f"Sac {notice["cote"]}")
-
+        
         json_code = []
         dictSac = {}
 

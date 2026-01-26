@@ -1,4 +1,4 @@
-from src.tools import load_df, convert_to_turtle, write_json_file, convert_json_context
+from src.tools import convert_to_turtle, write_json_file, convert_json_context, generate_id
 from src.template.template_notices import templatesJSON
 import logging
 import pandas as pd
@@ -24,6 +24,7 @@ class convert_lieux:
 
         # DataFrames Lieux
         __dflieux_juridiction = datamarts.get_catalogue_liuex_juridiction()
+        
         __dflieux_juridiction.drop(["provenance"], axis=1,inplace=True)
         __dflieux_juridiction["latitude"] = ""
         __dflieux_juridiction["longitude"] = ""
@@ -34,30 +35,19 @@ class convert_lieux:
         __dfJur = __dflieux_juridiction[~__dflieux_juridiction["vedette"].isin(__dflieux_geo_code_input["vedette"].to_list())]
         # Ajouter les lieux qui ne sont pas dans le geo code
         __dflieux_geo_code = pd.concat([__dflieux_geo_code_input,__dfJur])
+        
         __dflieux_geo_code.drop_duplicates(inplace=True) 
+        __dflieux_geo_code["id"] = __dflieux_geo_code.apply(lambda _: generate_id(),axis=1) 
 
         # Lieux Dataset
-        
         __dflieux_geo_code["departement"] = __dflieux_geo_code["departement"].str.strip()
         __dflieux_geo_code["commune"] = __dflieux_geo_code["commune"].str.strip()
         __dflieux_geo_code["code_INSEE"] = __dflieux_geo_code["code_INSEE"].str.strip()
         __dflieux_geo_code["type"] = __dflieux_geo_code["type_lieu"].apply(lambda x: self.__find_voc_lieux(x)) # Type of Lieux
         
-        
-        # CODE INSEE
-        __geo_code_insee = __dflieux_geo_code["code_INSEE"].to_list()
-        __list_code_insee = [cod_insee for cod_insee in __geo_code_insee if cod_insee != ""]
-        __dfCodeInsee = pd.DataFrame(__list_code_insee,columns=["code_INSEE"])
-        __dfCodeInsee.drop_duplicates(inplace=True)
-        __dfCodeInsee["json"] = __dfCodeInsee["code_INSEE"].apply( lambda x : self.__json_notice.get_insee(x))
-        self.__dfInsee = __dfCodeInsee
-        # Fichier Log
-        #__dfCodeInsee.to_csv("code_insee_geocode.csv",index=False)
-
         # DEPARTEMENT
         __geo_code_departement = __dflieux_geo_code[__dflieux_geo_code["type_lieu"] == "département"]
         #            Get code INSEE JSON
-        __geo_code_departement["json_insee"] = __geo_code_departement["code_INSEE"].apply( lambda x : __dfCodeInsee[__dfCodeInsee["code_INSEE"] == x]["json"].iloc[0] if x != "" else "")
         __geo_code_departement["json"] = __geo_code_departement.apply( lambda x : self.__json_notice.get_departement(x), axis=1)
         self.__dfDepartement = __geo_code_departement
         # Fichier Log
@@ -66,10 +56,9 @@ class convert_lieux:
         # COMMUNE
         __geo_code_commune = __dflieux_geo_code[__dflieux_geo_code["type_lieu"] == "commune"]
         __geo_code_commune["json_isDirectlyContainedBy"] = __geo_code_commune["departement"].apply(lambda x : self.__find_departement(x) if x != "" else "")
-        __geo_code_commune["json_insee"] = __geo_code_commune["code_INSEE"].apply( lambda x : __dfCodeInsee[__dfCodeInsee["code_INSEE"] == x]["json"].iloc[0] if x != "" else "")
         __geo_code_commune["others"] = ""
         __geo_code_commune["geocode"] = __geo_code_commune.apply( lambda x : f'POINT({x["longitude"]} {x["latitude"]})' if x["latitude"] != "" and x["longitude"] != "" else "", axis=1)
-        #__geo_code_commune.to_csv("geo_commune_debug.csv",index=False)
+        
         __geo_code_commune["json"] = __geo_code_commune.apply(lambda x : self.__json_notice.get_lieux_des_faits(x), axis=1)
         self.__dfCommune = __geo_code_commune
         # Fichier Log
@@ -79,7 +68,6 @@ class convert_lieux:
         # Tous les lieux different du type Département et Commune
         __geo_Lieux = __dflieux_geo_code[(__dflieux_geo_code["type_lieu"] != "département") & (__dflieux_geo_code["type_lieu"] != "commune")]
         __geo_Lieux["json_isDirectlyContainedBy"] = __geo_Lieux["commune"].apply(lambda x : self.__find_commune(x))
-        __geo_Lieux["json_insee"] = __geo_Lieux["code_INSEE"].apply( lambda x : __dfCodeInsee[__dfCodeInsee["code_INSEE"] == x]["json"].iloc[0] if x != "" else "")
         __geo_Lieux["others"] = ""
         __geo_Lieux["geocode"] = ""
         __geo_Lieux["json"] = __geo_Lieux.apply(lambda x : self.__json_notice.get_lieux_des_faits(x), axis=1)
@@ -133,7 +121,7 @@ class convert_lieux:
         [json_lieux_full.append(j) for j in self.__dfInsee["json"].to_list() ]
 
         json_output = convert_json_context(json_lieux_full)
-        #write_json_file(f"{self.__get_directory_lieux}/lieux_result.json",json_output)
+        write_json_file(f"{self.__get_directory_lieux}/lieux_result.json",json_output)
         convert_to_turtle(f"{self.__get_directory_lieux}/lieux_result.ttl",json_output)
         
         # Concat all lieux des faits        

@@ -363,6 +363,7 @@ class semsac:
 
             j1["id"] = j1_id
             j1["name"] = f"Première instruction de \"{title}\""
+            j1["order"] = "1"
             # Valider si on a le json de la juridiction
             j1["isOrWasPerformedBy"] = data["json_j1"]
 
@@ -383,6 +384,7 @@ class semsac:
 
             j2["id"] = j2_id
             j2["name"] = f"Deuxième instruction de \"{title}\""
+            j2["order"] = "2"
             if data["json_j2"] != "":
                 j2["isOrWasPerformedBy"] = data["json_j2"]
             else:
@@ -407,6 +409,8 @@ class semsac:
 
             j3["id"] = j3_id
             j3["name"] = f"Troisième instruction de \"{title}\""
+            j3["order"] = "3"
+            
             if data["json_j3"] != "":
                 self.logger.warning(f"Instruction: Error dans la cote {data["cote"]} ne se troue pas l'information de la Juridiction 3 : {data["Juridiction_3"]}")
                 j3["isOrWasPerformedBy"] = data["json_j3"]
@@ -549,8 +553,11 @@ class semsac:
         # Remove duplicates
         __dfAli = df_[["intitule_liasse","reference_sacs_liasse"]].drop_duplicates()
         __dfAliasses = pd.merge(__dfAli,self.notices[["cote","sac"]],how='left',left_on="reference_sacs_liasse",right_on="cote")
+        __dfAliasses.replace(np.nan,"",inplace=True)
+        # Log liasses
+        #__dfAliasses.apply(lambda x : self.logger.warning(f"Liasses: La cote chercher n'existe plus {x["reference_sacs_liasse"]}") if x["sac"] != "" else x,axis=1)
         # Add uri de la procedure
-        __dfAliasses["sac"] =  __dfAliasses["sac"].apply(lambda x : f"https://data.archives.haute-garonne.fr/instanciation/{x}")
+        __dfAliasses["sac"] =  __dfAliasses["sac"].apply(lambda x : f"https://data.archives.haute-garonne.fr/instanciation/{x}" if x != "" else "")
 
         # 
         list_aliasses = pd.Series(df_["intitule_liasse"]).unique()
@@ -569,14 +576,16 @@ class semsac:
                     tmp["physicalCharacteristicsNote"] = ""
 
 
-                tmp["hadComponent"] = dfAux["sac"].to_list()
+                tmp["hadComponent"] = [uriSac for uriSac in dfAux["sac"].to_list() if uriSac != ""]
                 
                 json = self.__json_notice.get_liasse(tmp)
 
                 data.append((dfAux["intitule_liasse"].iloc[0], json))
         
         if len(data) > 0:
-            return pd.DataFrame(data,columns=["intitule_liasse","json"])
+            dfOtuput = pd.DataFrame(data,columns=["intitule_liasse","json"])
+            dfOtuput = dfOtuput[dfOtuput["intitule_liasse"] != ""]
+            return dfOtuput
         else:
             return pd.DataFrame()
 
