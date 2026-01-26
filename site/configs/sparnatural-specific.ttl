@@ -46,3 +46,15 @@ sacs:CarrierType sh:deactivated "true"^^xsd:boolean .
 sacs:DemographicGroup sh:deactivated "true"^^xsd:boolean .
 sacs:CorporateBodyType sh:deactivated "true"^^xsd:boolean .
 sacs:TypeProcedure sh:deactivated "true"^^xsd:boolean .
+
+
+# Exemple de lien inverse
+sacs:Fait a sh:NodeShape;
+  sh:property sacs:Fait_inverse_resultsOrResultedFrom .
+
+sacs:Fait_inverse_resultsOrResultedFrom sh:path [ sh:inversePath rico:resultsOrResultedFrom ];
+  sh:name "a déclenché"@fr;
+  sh:description "Les Faits ont donné lieu à une procédure"@fr;
+  sh:minCount "1"^^xsd:integer;
+  sh:nodeKind sh:IRI;
+  sh:node sacs:Procedure .
