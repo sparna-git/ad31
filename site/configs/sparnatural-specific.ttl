@@ -30,7 +30,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
 
-sacs:Cote sh:deactivated "true"^^xsd:boolean.
+sacs:Identifiant sh:deactivated "true"^^xsd:boolean.
 sacs:Date sh:deactivated "true"^^xsd:boolean .
 
 sacs:Instruction sh:deactivated "true"^^xsd:boolean .
