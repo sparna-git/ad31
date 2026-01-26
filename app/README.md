@@ -1,21 +1,33 @@
-# ** Script de conversion des notices AD31 **
+# Script de conversion des notices AD31
 
 
-> Structure de pojet.
+## Structure de projet
 
-APP: 
-    - 
-
-1. Dossier data : Dossier des resources et le fichier des noticies (fichier excel).
-   1.1 catalogues: Stoccker les fichiers en excel Lieux des Faits, Personnes Morales, Juridictions et ark.
-   1.2 templateJSON: Dosier que a un fichier qui contient la structure JSON à utiliser dans la conversion de données.
-   1.3 vocabulaires; Dosier qui a des fichiers json avec des vocabilaires.
-2. Dossier src: Dossiers de script python
+1. Dossier `data` : Dossier des resources contenant les fichiers Excel d'origine
+   1. Dossier `catalogues`: Dichiers Excel Lieux des Faits, Personnes Morales, Juridictions et ark.
+   2. Dossier `templateJSON`: Contient un fichier qui donne la structure JSON à utiliser dans la conversion de données.
+   3. Dossier `vocabulaires`: Dossier contenant les fichiers JSON des vocabulaires.
+2. Dossier `src`: Dossier contenant les scripts python
    
 
-> #Script
+## Prérequis logiciels
 
-"init.py" : Debut de lancement de  la lecture de notices
+- Python version xxxxx
+- Poetry etc...
+- etc...
+
+## Avant de lancer la conversion
+
+- Mettre à jour les fichiers JSON de vocabulaires dans le dossier `vocabulaires` (ce process n'est pas automatique)
+- Mettre à jour le fichier de notices dans `data`. Conserver le même nom de fichier.
+- Mettre à jour les fichiers annexes dans `data/catalogues`. Conserver les mêmes noms de fichier
+
+
+## Lancement de la conversion
+
+_Expliquer les commandes pour lancer la conversion..._
+
+- `init.py` : Debut de lancement de  la lecture de notices
 
 [catalog]
     **lieux des faits** : Générer le catalog de tous les lieux
