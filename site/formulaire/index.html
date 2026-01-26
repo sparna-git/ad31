@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="{{ lang or '' }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sacs à procès - recherche de procédures</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- presentation page CSS -->
+  <link href="../assets/css/index-page.css" rel="stylesheet">
+
+  <!-- data page CSS -->
+  <link href="../assets/css/data.css" rel="stylesheet">
+
+  <!-- Index page CSS -->
+  <link href="../assets/css/presentation-page.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="../assets/fa/css/all.min.css" rel="stylesheet" />
+
+  <!-- Sparnatural-specific -->
+  <link href="../assets/css/sparnatural-form.css" rel="stylesheet">
+  <link href="../assets/css/sparnatural-theme-ad31.css" rel="stylesheet">
+
+  <!-- YASGUI CSS -->
+  <link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
+
+  <style>
+    main {
+      padding-top: 115px;
+      height: auto;
+      overflow: visible;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Recherche sacs à procès</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="">
+
+
+    <style>
+      .yasqe .CodeMirror {
+        font-size: 0.8em;
+      }
+
+      #sparnatural-container {
+
+      }
+
+      #yasqe {
+        display: none;
+      }
+
+      #yasr-section {
+        
+      }
+
+      #contact {
+        margin-top:40px;
+        padding: 0px;
+        padding-top: 20px;
+      }
+
+    </style>
+
+    <!-- /Sparnatural-specific -->
+
+    <!-- ======= Sparnatural Section ======= -->
+    <section id="sparnatural-section">
+      <div class="container-fluid">
+
+        <!-- This is where Sparnatural is inserted -->
+        <div class="row">
+
+          <div class="col-md-3">
+
+            <!-- add a text "Il faudrait aussi ajouter la phrase du type "You must press “add” for the term to be retained." ou "Input + Add + Search"" -->
+
+            <p class="text-muted small" style="margin-bottom: 10px;">
+              <i class="fas fa-lightbulb" aria-hidden="true" style="margin-right:2px; color: rgb(209, 209, 21);"></i>
+              <span >Cliquez sur “Ajouter” pour valider une recherche.</span>
+            </p>
+
+            <!-- Tab panes -->
+            <div class="tab-content" style="margin-bottom:15px;">
+
+              <div class="tab-pane active" id="sparnatural-form-1">
+                <!-- Sparnatural Form -->
+                <sparnatural-form
+                  src="https://xls2rdf.sparna.fr/rest/convert?noPostProcessings=true&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1X6GqNxMBVkflrJGj2kAm-wYz0Ey7nEOt%2Fexport%3Fformat%3Dxlsx ../configs/deactivated.ttl"
+                  lang="fr"
+                  defaultLang="fr"
+                  limit="5000"
+                  endpoint="https://proxy.sparnatural.eu/sparql-proxy/sparql?endpoint=http%3A%2F%2Fgraphdb.sparna.fr%2Frepositories%2FAD31"
+                  form="../configs/procedures/form.json"
+                  query="../configs/procedures/query.json"
+                  prefixes="skos:http://www.w3.org/2004/02/skos/core# rico:https://www.ica.org/standards/RiC/ontology#"     
+                ></sparnatural-form>
+              </div>
+
+            </div>
+
+            <input type="hidden" id="query-json"></input>
+          </div>
+
+          <!-- Éditeur SPARQL à droite -->
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-12">
+                  <a href="#" id="sparql-toggle"><i id="sparql-toggle-icon" class="fa-solid fa-eye"></i>&nbsp; <span>Afficher/masquer la requête</span></a>
+              </div>
+            </div>
+            <div class="row">
+              <div  class="col-md-12">
+                <div id="yasqe"  style="display:none;"></div>
+              </div>
+            </div>
+
+            <div class="row result-container">
+              <div id="yasr"></div>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+    </section><!-- End Sparnatural Section -->
+
+    <!-- Sparnatural-specific -->
+
+    <!-- YASGUI stuff -->
+    <script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+
+    <!-- Sparnatural Javascript -->
+    <script type="text/javascript" src="../assets/js/sparnatural-form.js"></script>
+    <script type="text/javascript" src="../assets/js/sparnatural-yasgui-plugins.js"></script>
+
+    <!-- /Sparnatural-specific -->
+
+    <!-- Json url (Compression) -->
+    <script src="https://cdn.jsdelivr.net/gh/masotime/json-url@master/dist/browser/json-url.js"></script>
+
+    <script>
+      // Select the Sparnatural form component
+      const sparnaturalForms = document.querySelectorAll("sparnatural-form");
+
+      sparnaturalForms[0].addEventListener("init", (event) => {
+        // Notify all plugins of configuration updates if they support it
+        for (const plugin in yasr.plugins) {
+          if (yasr.plugins[plugin].notifyConfiguration) {
+            yasr.plugins[plugin].notifyConfiguration(
+              sparnaturalForms[0].sparnaturalForm.specProvider
+            );
+          }
+        }
+      });
+
+      sparnaturalForms.forEach(form => {
+        // Listen for updates to the query and pass to YASQE
+        form.addEventListener("queryUpdated", (event) => {
+          const queryString = form.expandSparql(
+            event.detail.queryString
+          );
+
+          // Update YASQE with the new SPARQL query
+          yasqe.setValue(queryString);
+
+          for (const plugin in yasr.plugins) {
+            if (yasr.plugins[plugin].notifyQuery) {
+              yasr.plugins[plugin].notifyQuery(event.detail.queryJson);
+            }
+          }
+        });
+      });
+
+
+      sparnaturalForms.forEach(form => {
+        // Listen for form submission and trigger YASQE query
+        form.addEventListener("submit", () => {
+          form.disablePlayBtn();
+
+          // Afficher un message ou un spinner temporaire dans YASR
+          yasr.setResponse({
+            contentType: "text/html",
+            data: {
+              "head": {
+                "vars": ["message"]
+              },
+              "results": {
+                "bindings": [
+                  {
+                    "message": {
+                      "type": "literal",
+                      "value": "Chargement en cours..."
+                    }
+                  }
+                ]
+              }
+            },
+            status: 200
+          });
+
+          let finalResult = form.executeSparql(
+            yasqe.getValue(),
+            (finalResult) => {
+              // send final result to YasR
+              yasr.setResponse(finalResult);
+              // re-enable submit button
+              form.enablePlayBtn();
+            },
+            (error) => {
+              console.error("Got an error when executing SPARQL");
+              console.dir(error);
+            }
+          );
+        });      
+      });
+
+      const yasqe = new Yasqe(document.getElementById("yasqe"), {
+        requestConfig: { 
+          endpoint: "https://proxy.sparnatural.eu/sparql-proxy/sparql?endpoint=https%3A%2F%2Fsmt.esante.gouv.fr%2Fapi%2Fsparql",
+          method: "GET",
+          header: {}
+        },
+        copyEndpointOnNewTab: false  
+      });
+
+      Yasr.registerPlugin("TableX",SparnaturalYasguiPlugins.TableX);
+
+
+      delete Yasr.plugins['table'];
+      delete Yasr.plugins['response'];
+      const yasr = new Yasr(document.getElementById("yasr"), {
+        pluginOrder: ["TableX"],
+        defaultPlugin: "TableX",
+        // disable persistency
+        persistencyExpire: 0,
+        maxPersistentResponseSize: 0
+      });
+
+
+
+      // link yasqe and yasr
+      yasqe.on("queryResponse", function(_yasqe, response, duration) {
+        yasr.setResponse(response, duration);
+        sparnatural.enablePlayBtn();
+      });
+
+      document.getElementById('sparql-toggle').onclick = function() {
+        if(document.getElementById('yasqe').style.display == 'none') {
+          document.getElementById('yasqe').style.display = 'block';
+          yasqe.setValue(yasqe.getValue());
+          yasqe.refresh();
+          document.getElementById('sparql-toggle-icon').className = 'fad fa-eye-slash fa-fw';
+        } else {
+          document.getElementById('yasqe').style.display = 'none';
+          document.getElementById('sparql-toggle-icon').className = 'fad fa-eye fa-fw';
+        }
+        return false;        
+      } ;
+
+      // tab management
+      document.getElementById('sparnatural-form-1').onclick = function() {
+        if(!document.getElementById('sparnatural-form-1').classList.contains("active")) {
+          document.getElementById('sparnatural-form-1').classList.add("active");
+
+        }
+      }
+
+      document.querySelectorAll("a.yasr_external_ref_btn").forEach(el => {
+      el.href = "https://docs.triply.cc/yasgui/";
+      el.classList.remove("disabled");
+      el.title = "Voir la documentation personnalisée";
+  });
+
+
+
+    </script>
+
+  </main>
+
+  <!-- Pied de page SAPA -->
+  <footer class="text-center py-4" style="background: #f8f9fa; border-top: 1px solid #e5e5e5;">
+    <small>
+      Edité par
+      <a href="#" target="_blank" rel="noopener">...</a>
+      &nbsp;/&nbsp;
+      <a href="#" target="_blank" rel="noopener">Contact</a>
+      &nbsp;/&nbsp;
+    </small>
+  </footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-chevron-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+  <!-- Main JS File -->
+  <script src="../assets/js/main.js"></script>
+
+  <!-- jQuery and other scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    });
+  </script>  
+
+</body>
+</html>

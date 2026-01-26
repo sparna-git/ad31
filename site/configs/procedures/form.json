@@ -1,0 +1,22 @@
+{
+  "bindings": [
+    {
+      "variable": "qualificationFait",
+      "node": {
+        "type": "UserPrompt",
+        "name": {
+          "fr": "Qualification des faits"
+        }
+      }
+    },
+    {
+      "variable": "type",
+      "node": {
+        "type": "UserPrompt",
+        "name": {
+          "fr": "Type de procédure"
+        }
+      }
+    }
+  ]
+}

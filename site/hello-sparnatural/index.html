@@ -12,13 +12,13 @@
     <link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Font Awesome -->    
-    <link rel="stylesheet" href="fa/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/fa/css/all.min.css" />
 
     <!-- Sparnatural CSS -->
-    <link rel="stylesheet" href="sparnatural.css">
+    <link rel="stylesheet" href="../assets/css/sparnatural.css">
     
     <!-- This page custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -45,28 +45,24 @@
 
     <div class="container my-5">
       <p>
-        <em>This is a simple page demonstrating Sparnatural integration. Please read the <a href="https://docs.sparnatural.eu/hello-sparnatural/Hello-Sparnatural.html">"Hello Sparnatural" documentation</a> for a complete tutorial based on this page.</em>
-        <br/>
-        <em>Sparnatural is not displayed below ? This is probably because <a href="https://docs.sparnatural.eu/hello-sparnatural/Hello-Sparnatural.html#_Toc9">you should setup CORS loading of local files</a>.</em>
+
       </p>
       <h1>Hello, Sparnatural!</h1>
       <div class="col-lg-12 px-0">
 
         <p>Queries are sent to <a href="#" id="displayEndpoint">...</a></p>
         
-        <!-- uncomment to enable links to load sample queries
         <p>
           Load example queries :
           <a href="#" onclick="document.querySelector('spar-natural').loadQuery(window['example_1']);return false;">example 1</a>
           |
           <a href="#" onclick="document.querySelector('spar-natural').loadQuery(window['example_2']);return false;">example 2</a>
         </p>
-        -->
 
         <!-- The sparnatural web component with config attributes. -->
         <!-- See http://docs.sparnatural.eu/Javascript-integration.html#html-attributes-reference -->
         <spar-natural 
-            src="https://xls2rdf.sparna.fr/rest/convert?noPostProcessings=true&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1X6GqNxMBVkflrJGj2kAm-wYz0Ey7nEOt%2Fexport%3Fformat%3Dxlsx deactivated.ttl"
+            src="https://xls2rdf.sparna.fr/rest/convert?noPostProcessings=true&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1X6GqNxMBVkflrJGj2kAm-wYz0Ey7nEOt%2Fexport%3Fformat%3Dxlsx ../configs/deactivated.ttl"
             endpoint="https://proxy.sparnatural.eu/sparql-proxy/sparql?endpoint=http%3A%2F%2Fgraphdb.sparna.fr%2Frepositories%2FAD31"
             lang="fr"
             defaultLang="fr"
@@ -101,15 +97,15 @@
     <script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
 
     <!-- Sparnatural JS -->
-    <script src="sparnatural.js"></script>
+    <script src="../assets/js/sparnatural.js"></script>
 
     <!-- Sparnatural Custom YASR plugins -->
-    <script src="sparnatural-yasgui-plugins.js"></script>
+    <script src="../assets/js/sparnatural-yasgui-plugins.js"></script>
 
     <!-- File containing example queries -->
     <script src="example-queries.js"></script>
     
     <!-- This page custom JS -->
-    <script src="main.js"></script>    
+    <script src="../assets/js/main.js"></script>    
   </body>
 </html>
