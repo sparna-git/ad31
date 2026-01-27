@@ -48,7 +48,7 @@ sacs:CorporateBodyType sh:deactivated "true"^^xsd:boolean .
 sacs:TypeProcedure sh:deactivated "true"^^xsd:boolean .
 
 
-# Exemple de lien inverse
+# Lien inverse
 sacs:Fait a sh:NodeShape;
   sh:property sacs:Fait_inverse_resultsOrResultedFrom .
 
@@ -58,3 +58,127 @@ sacs:Fait_inverse_resultsOrResultedFrom sh:path [ sh:inversePath rico:resultsOrR
   sh:minCount "1"^^xsd:integer;
   sh:nodeKind sh:IRI;
   sh:node sacs:Procedure .
+
+
+# Lien inverse
+sacs:Instruction a sh:NodeShape;
+  sh:property sacs:Fait_inverse_hasOrHadSubevent .
+
+sacs:Instruction_inverse_hasOrHadSubevent sh:path [ sh:inversePath rico:hasOrHadSubevent ];
+  sh:name "fait partie de"@fr;
+  sh:description "Une instruction est l'instruction au sein d'une (et une seule) procédure"@fr;
+  sh:minCount "1"^^xsd:integer;
+  sh:maxCount "1"^^xsd:integer;
+  sh:nodeKind sh:IRI;
+  sh:node sacs:Procedure .
+
+
+# Lien inverse
+sacs:Juridiction a sh:NodeShape;
+  sh:property sacs:Fait_inverse_isOrWasPerformedBy .
+
+sacs:Juridiction_inverse_isOrWasPerformedBy sh:path [ sh:inversePath rico:isOrWasPerformedBy ];
+  sh:name "a mené"@fr;
+  sh:description "La juridiction a mené une instruction"@fr;
+  sh:nodeKind sh:IRI;
+  sh:node sacs:Instruction .
+
+
+# Lien inverse
+sacs:Juridiction a sh:NodeShape;
+  sh:property sacs:Fait_inverse_hasOrganicProvenance .
+
+sacs:Juridiction_inverse_hasOrganicProvenance sh:path [ sh:inversePath rico:hasOrganicProvenance ];
+  sh:name "a produit"@fr;
+  sh:description "Une juridiction peut être producteur de sacs"@fr;
+  sh:nodeKind sh:IRI;
+  sh:node sacs:Sac .
+
+
+# Lien inverse
+sacs:Lieu a sh:NodeShape;
+  sh:property sacs:Fait_inverse_hasOrHadLocation .
+
+sacs:Lieu_inverse_hasOrHadLocation sh:path [ sh:inversePath rico:hasOrHadLocation ];
+  sh:name "est l'emplacement de"@fr;
+  sh:nodeKind sh:IRI;
+  sh:class rico:Event .
+
+
+# Lien inverse
+sacs:Lieu a sh:NodeShape;
+  sh:property sacs:Fait_inverse_agentHasOrHadLocation .
+
+sacs:Lieu_inverse_agentHasOrHadLocation sh:path [ sh:inversePath rico:agentHasOrHadLocation ];
+  sh:name "est l'emplacement de"@fr;
+  sh:nodeKind sh:IRI;
+  sh:or (sacs:Juridiction sacs:PersonnePhysique sacs:PersonneMorale).
+
+
+# Lien inverse
+sacs:Procedure a sh:NodeShape;
+  sh:property sacs:Fait_inverse_documents .
+
+sacs:Procedure_inverse_documents sh:path [ sh:inversePath rico:documents ];
+  sh:name "est documentée par"@fr;
+  sh:description "Les procédures sont documentées par un sac et une notice de sac"@fr;
+  sh:minCount "2"^^xsd:integer;
+  sh:nodeKind sh:IRI;
+  sh:or (sacs:Notice sacs:Sac).
+
+
+# Lien inverse
+sacs:PersonneMorale a sh:NodeShape;
+  sh:property sacs:Fait_inverse_hasOrHadParticipant .
+
+sacs:PersonneMorale_inverse_hasOrHadParticipant sh:path [ sh:inversePath rico:hasOrHadParticipant ];
+  sh:name "a été impliquée dans"@fr;
+  sh:description "Une personne morale peut être impliquée dans une Procédure"@fr;
+  sh:nodeKind sh:IRI;
+  sh:node sacs:Procedure .
+
+
+# Lien inverse
+sacs:PersonnePhysique a sh:NodeShape;
+  sh:property sacs:Fait_inverse_hasOrHadParticipant .
+
+sacs:PersonnePhysique_inverse_hasOrHadParticipant sh:path [ sh:inversePath rico:hasOrHadParticipant ];
+  sh:name "a été impliquée dans"@fr;
+  sh:description "Une personne physique peut être impliquée dans une Procédure"@fr;
+  sh:nodeKind sh:IRI;
+  sh:node sacs:Procedure .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
