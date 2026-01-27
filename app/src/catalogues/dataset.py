@@ -30,6 +30,8 @@ class metadata:
         self.__voc_typeLieu = __vocabularies["voc_typeLieu"]
         self.__voc_qualifFaits = __vocabularies["voc_qualifFaits"]
         self.__voc_collectivite = __vocabularies["voc_collectivite"]
+        self.__voc_ordreinstruction = __vocabularies["voc_ordreinstruction"]
+        
         # Logging
         self.logger = logging.getLogger(__name__)
 
@@ -134,6 +136,12 @@ class metadata:
     
     def __set_read_config_notices(self) -> dict:
         return read_json_str(self.__conf_notices)
+    
+    def __set_ordre_instruction(self):
+        return read_json_str(self.__voc_ordreinstruction)
+    
+    def get_voc_ordre_intruction(self):
+        return self.__set_ordre_instruction()
     
     # Template JSON pour chaque notices
     def get_conf_notices(self) -> dict:

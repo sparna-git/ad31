@@ -30,6 +30,7 @@ vocabularies:
   voc_typeProcedure: 'data/vocabularies/typeProcedure.json'
   voc_qualifFaits: 'data/vocabularies/qualifFaits.json'
   voc_collectivite: 'data/vocabularies/typeCollectivité.json'
+  voc_ordreinstruction: 'data/vocabularies/ordreInstruction.json'
 
 output:
   lieux: "output/lieux"

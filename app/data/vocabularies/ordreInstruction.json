@@ -1,0 +1,14 @@
+{
+    "premier": {
+        "Concept URI": "type:oipre",
+        "skos:notation": "oipre"
+    },
+    "deuxieme": {
+        "Concept URI": "type:oideu",
+        "skos:notation": "oideu"
+    },
+    "troisieme": {
+        "Concept URI": "type:oitro",
+        "skos:notation": "oitro"
+    }
+}

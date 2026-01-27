@@ -212,14 +212,13 @@ class templatesJSON:
         templateJsonLd["@id"] = self.__update_value_jsonLd(templateJsonLd["@id"],data["id"])
         templateJsonLd["rico:name"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["name"])
         
-        if data["order"]:
-            templateJsonLd["rico:order"] = self.__update_value_jsonLd(templateJsonLd["rico:name"],data["order"])
+        if data["hasActivityType"]:
+            templateJsonLd["rico:hasActivityType"] = [self.__update_value_jsonLd(templateJsonLd["rico:hasActivityType"],at) for at in data["hasActivityType"]]
         else:
-            del templateJsonLd["rico:order"]
-        
+            del templateJsonLd["rico:hasActivityType"]
         
         if data["isOrWasPerformedBy"]:
-            templateJsonLd["rico:isOrWasPerformedBy"] = data["isOrWasPerformedBy"] #self.__update_value_jsonLd(templateJsonLd["rico:isOrWasPerformedBy"],data["isOrWasPerformedBy"])
+            templateJsonLd["rico:isOrWasPerformedBy"] = data["isOrWasPerformedBy"]
         else:
             del templateJsonLd["rico:isOrWasPerformedBy"]
 

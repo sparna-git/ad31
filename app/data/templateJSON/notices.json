@@ -45,8 +45,7 @@
         "@id": "https://data.archives.haute-garonne.fr/evenement/{}",
         "@type": "rico:Activity",
         "rico:name": { "@value": "{}", "@language" : "fr" },
-        "rico:order": "{}",
-        "rico:hasActivityType" : { "@id": "type:acins" },
+        "rico:hasActivityType" : { "@id": "{}" },
         "rico:followsInTime" : { "@id" : "{}" },
         "rico:precedesInTime" : { "@id" : "{}" },
         "rico:isOrWasPerformedBy" : { "@id" : "{}" }

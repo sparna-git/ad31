@@ -61,6 +61,7 @@ class semsac:
         self.__personnes_physiques_profession = datamarts.get_voc_profession()
         self.__qualification_faits_type = datamarts.get_voc_qualifFaits()
         self.__type_of_procedure = datamarts.get_voc_typeProcedure()
+        self.__voc_ordre_instruction = datamarts.get_voc_ordre_intruction()
         
         # Lecture de autres données
         # Créer resource de Lieux
@@ -363,7 +364,11 @@ class semsac:
 
             j1["id"] = j1_id
             j1["name"] = f"Première instruction de \"{title}\""
-            j1["order"] = "1"
+            
+            # Chercher le code d'instruction dans le vocabilaire
+            premier_instruction = self.__voc_ordre_instruction["premier"]
+            j1["hasActivityType"] = ["type:acins",premier_instruction["Concept URI"]]
+            
             # Valider si on a le json de la juridiction
             j1["isOrWasPerformedBy"] = data["json_j1"]
 
@@ -384,7 +389,10 @@ class semsac:
 
             j2["id"] = j2_id
             j2["name"] = f"Deuxième instruction de \"{title}\""
-            j2["order"] = "2"
+            
+            # Chercher le code d'instruction dans le vocabilaire
+            deuxieme_instruction = self.__voc_ordre_instruction["deuxieme"]
+            j2["hasActivityType"] = ["type:acins",deuxieme_instruction["Concept URI"]]
             if data["json_j2"] != "":
                 j2["isOrWasPerformedBy"] = data["json_j2"]
             else:
@@ -409,7 +417,10 @@ class semsac:
 
             j3["id"] = j3_id
             j3["name"] = f"Troisième instruction de \"{title}\""
-            j3["order"] = "3"
+            
+            # Chercher le code d'instruction dans le vocabilaire
+            troisieme_instruction = self.__voc_ordre_instruction["troisieme"]
+            j3["hasActivityType"] = ["type:acins",troisieme_instruction["Concept URI"]]
             
             if data["json_j3"] != "":
                 self.logger.warning(f"Instruction: Error dans la cote {data["cote"]} ne se troue pas l'information de la Juridiction 3 : {data["Juridiction_3"]}")

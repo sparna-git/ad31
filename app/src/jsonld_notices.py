@@ -1,8 +1,7 @@
-from .tools import generate_id, generate_json_URI, convert_to_turtle, write_json_file, convert_json_context
+from .tools import convert_to_turtle, write_json_file, convert_json_context
 from .semsac_notices import semsac
 from .template.template_notices import templatesJSON
 import pandas as pd
-import numpy as np
 import logging
 
 class convert:
@@ -11,7 +10,6 @@ class convert:
     pd.options.mode.copy_on_write = True
     
     def __init__(self):
-
         
         self.logger = logging.getLogger(__name__)   
 
@@ -39,6 +37,7 @@ class convert:
         # Templates JSON-LD
         __templateJsonLD = self.__resource.datamarts.get_conf_notices()
         self.__json_notice = templatesJSON(__templateJsonLD) 
+ 
     
     def __physicalCharacteristicsNote(self,intitule_liasse:str):
 
@@ -259,11 +258,6 @@ class convert:
         else:
             dictSac["wasComponentOf_ids"] = ""
         
-        # État de conservation des documents
-        #pcn = self.__physicalCharacteristicsNote(self.__dfTitle[self.__dfTitle["cote"] == notice["cote"]]["intitule_liasse"].iloc[0])
-        #if pcn != "":
-        #    dictSac["physicalCharacteristicsNote"] = pcn
-        #else:
         dictSac["physicalCharacteristicsNote"] = ""
         
         # Caractéristiques matérielles du sac STRUCTURE
@@ -308,7 +302,7 @@ class convert:
         #write_json_file(f"{self.__get_directory_notices}/semsac_{name_file}.json",json_output_string)
         # Ecrir un fichier graph
         convert_to_turtle(f"{self.__get_directory_notices}/semsac_{name_file}.ttl",json_output_string)
-
+        
     # Leture de notices
     def read_notices(self):
         # Read Notices

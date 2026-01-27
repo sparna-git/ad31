@@ -1,2 +1,5 @@
 /app/output
 /app/src/__pycache__
+/app/validation
+/app/src/catalogues/__pycache__
+/app/src/template/__pycache__

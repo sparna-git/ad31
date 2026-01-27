@@ -118,10 +118,9 @@ class convert_lieux:
         [json_lieux_full.append(j) for j in self.__dfDepartement["json"].to_list() ]
         [json_lieux_full.append(j) for j in self.__dfCommune["json"].to_list() ]
         [json_lieux_full.append(j) for j in self.__dfLieux["json"].to_list() ]
-        [json_lieux_full.append(j) for j in self.__dfInsee["json"].to_list() ]
 
         json_output = convert_json_context(json_lieux_full)
-        write_json_file(f"{self.__get_directory_lieux}/lieux_result.json",json_output)
+        #write_json_file(f"{self.__get_directory_lieux}/lieux_result.json",json_output)
         convert_to_turtle(f"{self.__get_directory_lieux}/lieux_result.ttl",json_output)
         
         # Concat all lieux des faits        
