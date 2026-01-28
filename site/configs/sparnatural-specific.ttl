@@ -62,7 +62,7 @@ sacs:Fait_inverse_resultsOrResultedFrom sh:path [ sh:inversePath rico:resultsOrR
 
 # Lien inverse
 sacs:Instruction a sh:NodeShape;
-  sh:property sacs:Fait_inverse_hasOrHadSubevent .
+  sh:property sacs:Instruction_inverse_hasOrHadSubevent .
 
 sacs:Instruction_inverse_hasOrHadSubevent sh:path [ sh:inversePath rico:hasOrHadSubevent ];
   sh:name "fait partie de"@fr;
@@ -75,7 +75,7 @@ sacs:Instruction_inverse_hasOrHadSubevent sh:path [ sh:inversePath rico:hasOrHad
 
 # Lien inverse
 sacs:Juridiction a sh:NodeShape;
-  sh:property sacs:Fait_inverse_isOrWasPerformedBy .
+  sh:property sacs:Juridiction_inverse_isOrWasPerformedBy .
 
 sacs:Juridiction_inverse_isOrWasPerformedBy sh:path [ sh:inversePath rico:isOrWasPerformedBy ];
   sh:name "a mené"@fr;
@@ -86,7 +86,7 @@ sacs:Juridiction_inverse_isOrWasPerformedBy sh:path [ sh:inversePath rico:isOrWa
 
 # Lien inverse
 sacs:Juridiction a sh:NodeShape;
-  sh:property sacs:Fait_inverse_hasOrganicProvenance .
+  sh:property sacs:Juridiction_inverse_hasOrganicProvenance .
 
 sacs:Juridiction_inverse_hasOrganicProvenance sh:path [ sh:inversePath rico:hasOrganicProvenance ];
   sh:name "a produit"@fr;
@@ -97,7 +97,7 @@ sacs:Juridiction_inverse_hasOrganicProvenance sh:path [ sh:inversePath rico:hasO
 
 # Lien inverse
 sacs:Lieu a sh:NodeShape;
-  sh:property sacs:Fait_inverse_hasOrHadLocation .
+  sh:property sacs:Lieu_inverse_hasOrHadLocation .
 
 sacs:Lieu_inverse_hasOrHadLocation sh:path [ sh:inversePath rico:hasOrHadLocation ];
   sh:name "est l'emplacement de"@fr;
@@ -107,7 +107,7 @@ sacs:Lieu_inverse_hasOrHadLocation sh:path [ sh:inversePath rico:hasOrHadLocatio
 
 # Lien inverse
 sacs:Lieu a sh:NodeShape;
-  sh:property sacs:Fait_inverse_agentHasOrHadLocation .
+  sh:property sacs:Lieu_inverse_agentHasOrHadLocation .
 
 sacs:Lieu_inverse_agentHasOrHadLocation sh:path [ sh:inversePath rico:agentHasOrHadLocation ];
   sh:name "est l'emplacement de"@fr;
@@ -116,7 +116,7 @@ sacs:Lieu_inverse_agentHasOrHadLocation sh:path [ sh:inversePath rico:agentHasOr
 
 # Lien inverse
 sacs:Procedure a sh:NodeShape;
-  sh:property sacs:Fait_inverse_documents .
+  sh:property sacs:Procedure_inverse_documents .
 
 sacs:Procedure_inverse_documents sh:path [ sh:inversePath rico:documents ];
   sh:name "est documentée par"@fr;
@@ -128,7 +128,7 @@ sacs:Procedure_inverse_documents sh:path [ sh:inversePath rico:documents ];
 
 # Lien inverse
 sacs:PersonneMorale a sh:NodeShape;
-  sh:property sacs:Fait_inverse_hasOrHadParticipant .
+  sh:property sacs:PersonneMorale_inverse_hasOrHadParticipant .
 
 sacs:PersonneMorale_inverse_hasOrHadParticipant sh:path [ sh:inversePath rico:hasOrHadParticipant ];
   sh:name "a été impliquée dans"@fr;
@@ -139,7 +139,7 @@ sacs:PersonneMorale_inverse_hasOrHadParticipant sh:path [ sh:inversePath rico:ha
 
 # Lien inverse
 sacs:PersonnePhysique a sh:NodeShape;
-  sh:property sacs:Fait_inverse_hasOrHadParticipant .
+  sh:property sacs:PersonnePhysique_inverse_hasOrHadParticipant .
 
 sacs:PersonnePhysique_inverse_hasOrHadParticipant sh:path [ sh:inversePath rico:hasOrHadParticipant ];
   sh:name "a été impliquée dans"@fr;
