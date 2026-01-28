@@ -29,7 +29,8 @@
    * Poetry: 
   
      * Installation avec Linux, Windows (WSL) 
-      Lancer l'instruction: `curl -sSL https://install.python-poetry.org | python3 -`
+      Lancer l'instruction: 
+         `curl -sSL https://install.python-poetry.org | python3 -`
 
 ## mise à jours poetry
 
@@ -42,7 +43,7 @@
 ## Avant de lancer la conversion
 
 
-- Mettre à jour les fichiers JSON de vocabulaires dans le dossier `vocabulaires` (ce process n'est pas automatique) [Voir: Comment generer un fichier json à partir d'un fichier de vocabulaires Excel.]
+- Mettre à jour les fichiers JSON de vocabulaires dans le dossier `vocabulaires` (ce process n'est pas automatique) [Voir: Generer un fichier json à partir d'un fichier de vocabulaires Excel.]
 - Mettre à jour le fichier de notices dans `data`. Conserver le même nom de fichier.
 - Mettre à jour les fichiers annexes dans `data/catalogues`. Conserver les mêmes noms de fichier
 
@@ -75,7 +76,7 @@
     **Juridictions** : Générer le catalog des Juridictions
 
 
-# Comment generer un fichier json à partir d'un fichier de vocabulaires Excel.
+# Generer un fichier json à partir d'un fichier de vocabulaires Excel.
 
 Le processus est developper de façon manunuelle, on va utiliser les colonnes `Concept URI`, `skos:notation`, `skos:prefLabel` de chaque fichier de vocabulaire.
 
