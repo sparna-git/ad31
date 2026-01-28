@@ -112,8 +112,7 @@ sacs:Lieu a sh:NodeShape;
 sacs:Lieu_inverse_agentHasOrHadLocation sh:path [ sh:inversePath rico:agentHasOrHadLocation ];
   sh:name "est l'emplacement de"@fr;
   sh:nodeKind sh:IRI;
-  sh:or (sacs:Juridiction sacs:PersonnePhysique sacs:PersonneMorale).
-
+  sh:or ( [sh:node sacs:Juridiction] [sh:node sacs:PersonnePhysique] [sh:node sacs:PersonneMorale] ).
 
 # Lien inverse
 sacs:Procedure a sh:NodeShape;
@@ -124,7 +123,7 @@ sacs:Procedure_inverse_documents sh:path [ sh:inversePath rico:documents ];
   sh:description "Les procédures sont documentées par un sac et une notice de sac"@fr;
   sh:minCount "2"^^xsd:integer;
   sh:nodeKind sh:IRI;
-  sh:or (sacs:Notice sacs:Sac).
+  sh:or ( [sh:node sacs:Notice] [sh:node sacs:Sac] ).
 
 
 # Lien inverse
