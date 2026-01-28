@@ -50,16 +50,16 @@
 
    Le lancement du script de conversion, on va utiliser la commande suivant:
       `poetry run python [nom du fichier python principal]`
-   Exempe de lancement:
+   Exemple de lancement:
       
-      ```Python
+      ```py
          poetry run python AD31Convert.py
       ```
 
    Résultat:
       Les fichiers de conversion seront stockés dans le dossier parametre dans le fichier config.yaml.
 
-      ```yaml
+      ```yml
          output:
             lieux: "output/lieux"
             notices: "output/notices"
