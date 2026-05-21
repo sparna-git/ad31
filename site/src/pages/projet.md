@@ -22,5 +22,7 @@ Pour y parvenir, un travail approfondi sur les données existantes a été néce
 Parallèlement, le projet a permis d’intégrer une dimension de fiabilité et de traçabilité des données, rendue possible par l’application de la norme RiC. Chaque étape du traitement archivistique a été documentée, offrant aux utilisateurs une lecture transparente du corpus.
 
 La dimension expérimentale de ce projet n’est pas une fin en soi : elle vise avant tout à proposer de nouvelles manières d’accéder aux archives et d’en explorer la richesse.
+Ce travail a également permis de produire un modèle de données réutilisable. Le modèle SemPER est désormais publié afin de pouvoir être repris, adapté ou étendu par d’autres projets souhaitant décrire des procédures judiciaires selon une approche similaire. Il ouvre ainsi la possibilité de comparer des corpus différents et de développer des analyses à plus grande échelle, au-delà du seul cas du parlement de Toulouse.
+Le modèle de données SemPER est formalisé en SHACL et mis à disposition via une [page web dédiée](../../shacl/AD31%20SHACL.html), permettant son téléchargement au format RDF/Turtle.
 
 Le projet SemPER, mené par les Archives départementales de la Haute-Garonne, a bénéficié de l'expertise de Florence Clavaud, responsable du Lab des Archives nationales, et membre exécutif du CIA/EGAD, en charge du développement de RiC, ainsi que de l'appui technique et méthodologique de la société [Sparna](https://www.sparna.fr).
