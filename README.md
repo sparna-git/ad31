@@ -2,7 +2,7 @@
 
 ## Site web
 
-L'URL publique du site est [https://sparna-git.github.io/SemPER](https://sparna-git.github.io/SemPER)
+L'URL publique du site est [https://sparna-git.github.io/semper](https://sparna-git.github.io/semper)
 
 ## Dossiers
 
