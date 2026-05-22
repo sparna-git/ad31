@@ -34,14 +34,14 @@
 
 <https://data.archives.haute-garonne.fr/modeles/sacsaproces> a owl:Ontology;
   dct:title "Modélisation du fonds des sacs à procès";
-  dct:abstract "Cette page documente la structure des données du fonds des Sacs à Procès des Archives Départemantales de la Haute-Garonne";
+  dct:abstract "Cette page documente la structure des données du fonds des Sacs à Procès des Archives Départementales de la Haute-Garonne";
   dct:creator "Archives Départementales de la Haute-Garonne";
   dct:contributor "Sparna";
   dct:issued "2026-03-01"^^xsd:date;
   dcat:distribution _:18720d1bedde44128129dc9f5da6671d998 .
 
 _:18720d1bedde44128129dc9f5da6671d998 dct:format <https://www.iana.org/assignments/media-types/text/turtle>;
-  dcat:downloadURL <https://sparna-git.github.io/semsac/configs/ad31-shacl.ttl> .
+  dcat:downloadURL <https://sparna-git.github.io/semper/configs/ad31-shacl.ttl> .
 
 sacs:Identifiant a sh:NodeShape;
   volipi:iconName "fa-solid fa-laptop-code";
