@@ -1,8 +1,8 @@
-# SemSac
+# SemPER - Sémantisation des Procédures en Réseau
 
 ## Site web
 
-L'URL publique du site est [https://sparna-git.github.io/semsac]([https://sparna-git.github.io/ad31/hello-sparnatural/](https://sparna-git.github.io/semsac))
+L'URL publique du site est [https://sparna-git.github.io/semper](https://sparna-git.github.io/semper)
 
 ## Dossiers
 
